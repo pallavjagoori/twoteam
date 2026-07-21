@@ -10,6 +10,15 @@ infra-up:
 infra-down:
 	docker compose -f infrastructure/compose.yml down
 
+reference-reset:
+	bash scripts/reference-reset.sh
+
+reference-verify:
+	docker compose -f infrastructure/reference/compose.yml run --rm verify
+
+reference-down:
+	docker compose -f infrastructure/reference/compose.yml down
+
 api-dev:
 	cd apps/api && php artisan serve
 
