@@ -14,6 +14,7 @@ const repositoryRoot = path.resolve(webRoot, '../..');
 const chatwootRoot = path.resolve(repositoryRoot, 'upstream/chatwoot');
 const javascriptRoot = path.resolve(chatwootRoot, 'app/javascript');
 const runtimeAdapter = path.resolve(webRoot, 'src/adapters/chatwootRuntime.ts');
+const actionCableAdapter = path.resolve(webRoot, 'src/adapters/actionCable.ts');
 const entrypoint = (name: string) =>
   path.resolve(javascriptRoot, `entrypoints/${name}.js`);
 const tailwindConfig = loadTailwindConfig(
@@ -27,18 +28,46 @@ tailwindConfig.content = tailwindContent.map(pattern =>
   path.resolve(chatwootRoot, pattern),
 );
 
-const aliases = {
-  vue: 'vue/dist/vue.esm-bundler.js',
-  components: path.resolve(javascriptRoot, 'dashboard/components'),
-  next: path.resolve(javascriptRoot, 'dashboard/components-next'),
-  v3: path.resolve(javascriptRoot, 'v3'),
-  dashboard: path.resolve(javascriptRoot, 'dashboard'),
-  helpers: path.resolve(javascriptRoot, 'shared/helpers'),
-  shared: path.resolve(javascriptRoot, 'shared'),
-  survey: path.resolve(javascriptRoot, 'survey'),
-  widget: path.resolve(javascriptRoot, 'widget'),
-  assets: path.resolve(javascriptRoot, 'dashboard/assets'),
-};
+const aliases = [
+  {
+    find: /^@rails\/actioncable(?:\/src)?$/,
+    replacement: actionCableAdapter,
+  },
+  { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' },
+  {
+    find: 'components',
+    replacement: path.resolve(javascriptRoot, 'dashboard/components'),
+  },
+  {
+    find: 'next',
+    replacement: path.resolve(javascriptRoot, 'dashboard/components-next'),
+  },
+  { find: 'v3', replacement: path.resolve(javascriptRoot, 'v3') },
+  {
+    find: 'dashboard',
+    replacement: path.resolve(javascriptRoot, 'dashboard'),
+  },
+  {
+    find: 'helpers',
+    replacement: path.resolve(javascriptRoot, 'shared/helpers'),
+  },
+  {
+    find: 'shared',
+    replacement: path.resolve(javascriptRoot, 'shared'),
+  },
+  {
+    find: 'survey',
+    replacement: path.resolve(javascriptRoot, 'survey'),
+  },
+  {
+    find: 'widget',
+    replacement: path.resolve(javascriptRoot, 'widget'),
+  },
+  {
+    find: 'assets',
+    replacement: path.resolve(javascriptRoot, 'dashboard/assets'),
+  },
+];
 
 const railsReplacementAdapter = () => ({
   name: 'twoteam-rails-replacement-adapter',

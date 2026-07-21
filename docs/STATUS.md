@@ -6,9 +6,9 @@
 | --- | --- |
 | Current phase | Authentication and tenancy |
 | Completed roadmap work | PRs 001-011: authentication complete |
-| In progress | PR 019 labels and assignments |
-| Completion on `main` | 55% |
-| Completion after this PR | 60% |
+| In progress | PR 020 realtime transport |
+| Completion on `main` | 60% |
+| Completion after this PR | 64% |
 | First usable release target | PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -40,7 +40,7 @@ requests do not count as completed progress.
 | 017 | Conversations | 49% | Complete | 25 tests, 148 assertions, 100% coverage; inbox list, status and priority pass |
 | 018 | Messages | 55% | Complete | 27 tests, 169 assertions, 100% coverage; replies, notes, delivery, retry and history pass |
 | 019 | Labels and assignments | 60% | Complete | 29 tests, 195 assertions, 100% coverage; labels and agent/team assignments pass |
-| 020 | Realtime transport | 64% | Not started | — |
+| 020 | Realtime transport | 64% | Complete | 31 API tests, 208 assertions, 100% coverage; authenticated replay, presence and reconnect pass |
 | 021 | Attachments and storage | 67% | Not started | — |
 | 022 | Website widget | 70% | Not started | — |
 | 023 | Notifications | 73% | Not started | — |

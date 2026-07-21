@@ -29,9 +29,10 @@ assigned.
 | Teams and agents | @pallavjagoori | Complete | Complete | Agent availability, team CRUD and tenant isolation | In progress | Complete | Not started |
 | Contacts | @pallavjagoori | Complete | Complete | CRUD, search, pagination and tenant isolation | In progress | Complete | Not started |
 | Inboxes | @pallavjagoori | Complete | Complete | Website Widget/API CRUD, secret rotation and isolation | In progress | Complete | Not started |
-| Conversations | @pallavjagoori | Complete | Complete | Inbox list, create, status, priority and isolation | In progress | Complete | Not started |
-| Messages | @pallavjagoori | Complete | Complete | History, replies, notes, delivery, retry and deletion | In progress | Complete | Not started |
-| Labels and assignments | @pallavjagoori | Complete | Complete | Label CRUD, tagging and agent/team assignment | In progress | Complete | Not started |
+| Conversations | @pallavjagoori | Complete | Complete | Inbox list, create, status, priority and isolation | Complete | Complete | Not started |
+| Messages | @pallavjagoori | Complete | Complete | History, replies, notes, delivery, retry and deletion | Complete | Complete | Not started |
+| Labels and assignments | @pallavjagoori | Complete | Complete | Label CRUD, tagging and agent/team assignment | Complete | Complete | Not started |
+| Realtime transport | @pallavjagoori | Complete | Complete | Durable cursor-based event outbox | Complete | In progress | In progress |
 | Attachments | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
 | Website widget | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Notifications | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |

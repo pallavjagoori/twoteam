@@ -7,6 +7,7 @@ use App\Models\Conversation;
 use App\Models\Message;
 use App\Support\ContactPayload;
 use App\Support\MessagePayload;
+use App\Support\RealtimePublisher;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -34,7 +35,10 @@ class MessageController extends Controller
         $message = $item->messages()->create($data + ['account_id' => $account->id, 'inbox_id' => $item->inbox_id, 'sender_id' => $request->user()->id, 'message_type' => 1, 'status' => 'sent']);
         $item->update(['last_activity_at' => now()]);
 
-        return response()->json(MessagePayload::make($message->load(['conversation', 'sender'])));
+        $payload = MessagePayload::make($message->load(['conversation', 'sender']));
+        RealtimePublisher::publish($account->id, 'message.created', $payload);
+
+        return response()->json($payload);
     }
 
     public function update(Request $request, Account $account, int $conversation, Message $message): JsonResponse
