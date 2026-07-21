@@ -30,7 +30,7 @@ assigned.
 | Contacts | @pallavjagoori | Complete | Complete | CRUD, search, pagination and tenant isolation | In progress | Complete | Not started |
 | Inboxes | @pallavjagoori | Complete | Complete | Website Widget/API CRUD, secret rotation and isolation | In progress | Complete | Not started |
 | Conversations | @pallavjagoori | Complete | Complete | Inbox list, create, status, priority and isolation | In progress | Complete | Not started |
-| Messages | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
+| Messages | @pallavjagoori | Complete | Complete | History, replies, notes, delivery, retry and deletion | In progress | Complete | Not started |
 | Labels and assignments | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Attachments | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
 | Website widget | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
