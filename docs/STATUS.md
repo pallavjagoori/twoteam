@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Current phase | Authentication and tenancy |
-| Completed roadmap work | PRs 001-010: compatibility infrastructure complete |
-| In progress | PR 011 users and authentication |
-| Completion on `main` | 25% |
-| Completion after this PR | 28% |
+| Completed roadmap work | PRs 001-011: authentication complete |
+| In progress | PR 012 accounts and memberships |
+| Completion on `main` | 28% |
+| Completion after this PR | 31% |
 | First usable release target | PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -31,8 +31,8 @@ requests do not count as completed progress.
 | 008 | Reproducible Rails reference | 19% | Complete | Pinned Rails image and deterministic fixture fingerprint on `main` |
 | 009 | HTTP differential testing | 22% | Complete | Status, header and body comparison with CI failure-mode tests |
 | 010 | Job, mail, webhook and realtime contracts | 25% | Complete | Four-category schema, scenario and CI validator on `main` |
-| 011 | Users and authentication | 28% | In progress | Compatible token headers, validation, revocation and coverage tests |
-| 012 | Accounts and memberships | 31% | Not started | — |
+| 011 | Users and authentication | 28% | Complete | Compatible token headers, validation, revocation and 100% application coverage on `main` |
+| 012 | Accounts and memberships | 31% | Complete | 14 Laravel tests, 50 assertions, 100% coverage; membership bootstrap and tenant isolation pass |
 | 013 | Authorization policies | 35% | Not started | — |
 | 014 | Teams, agents and availability | 38% | Not started | — |
 | 015 | Contacts | 41% | Not started | — |

@@ -29,8 +29,10 @@ the active token.
 - session validation and revocation
 - minimal Chatwoot user payload
 
-Account memberships are deliberately empty until PR 012 establishes the
-tenant model. MFA, SSO, password recovery and session-limit management remain
+Account memberships are populated by PR 012 from the `account_users` tenant
+boundary. The account list includes role, availability, active timestamp and
+permissions required by the frontend bootstrap. MFA, SSO, password recovery
+and session-limit management remain
 visible follow-up work; they must not be treated as compatible yet.
 
 ## Coverage
