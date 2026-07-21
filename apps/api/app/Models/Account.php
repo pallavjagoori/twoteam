@@ -20,6 +20,16 @@ class Account extends Model
         return $this->hasMany(Contact::class);
     }
 
+    public function channels(): HasMany
+    {
+        return $this->hasMany(Channel::class);
+    }
+
+    public function inboxes(): HasMany
+    {
+        return $this->hasMany(Inbox::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'account_users')
