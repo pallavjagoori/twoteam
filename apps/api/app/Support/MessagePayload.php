@@ -21,6 +21,9 @@ class MessagePayload
         if ($message->sender) {
             $payload['sender'] = ['id' => $message->sender->id, 'name' => $message->sender->name, 'email' => $message->sender->email, 'type' => 'user'];
         }
+        if ($message->attachments->isNotEmpty()) {
+            $payload['attachments'] = $message->attachments->map(fn ($attachment) => AttachmentPayload::make($attachment))->all();
+        }
 
         return $payload;
     }

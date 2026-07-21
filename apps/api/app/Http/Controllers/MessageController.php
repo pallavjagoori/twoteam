@@ -11,13 +11,15 @@ use App\Support\RealtimePublisher;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class MessageController extends Controller
 {
     public function index(Request $request, Account $account, int $conversation): JsonResponse
     {
         $item = $this->conversation($request, $account, $conversation);
-        $query = $item->messages()->with(['conversation', 'sender']);
+        $query = $item->messages()->with(['conversation', 'sender', 'attachments.message.sender']);
         if ($request->filled('before')) {
             $query->where('id', '<', $request->integer('before'));
         }
@@ -31,11 +33,28 @@ class MessageController extends Controller
     public function store(Request $request, Account $account, int $conversation): JsonResponse
     {
         $item = $this->conversation($request, $account, $conversation);
-        $data = $request->validate(['content' => ['nullable', 'string'], 'private' => ['sometimes', 'boolean'], 'echo_id' => ['nullable', 'string'], 'content_attributes' => ['sometimes', 'array']]);
+        if (is_string($request->input('content_attributes'))) {
+            $request->merge(['content_attributes' => json_decode($request->input('content_attributes'), true)]);
+        }
+        $data = $request->validate([
+            'content' => ['nullable', 'string'], 'private' => ['sometimes', 'boolean'],
+            'echo_id' => ['nullable', 'string'], 'content_attributes' => ['sometimes', 'array'],
+            'attachments' => ['sometimes', 'array', 'max:10'], 'attachments.*' => ['file', 'max:20480'],
+        ]);
+        $files = $data['attachments'] ?? [];
+        unset($data['attachments']);
         $message = $item->messages()->create($data + ['account_id' => $account->id, 'inbox_id' => $item->inbox_id, 'sender_id' => $request->user()->id, 'message_type' => 1, 'status' => 'sent']);
+        foreach ($files as $file) {
+            $path = $file->storeAs("attachments/{$account->id}", Str::uuid().'.'.$file->extension());
+            $message->attachments()->create([
+                'account_id' => $account->id, 'disk' => config('filesystems.default'), 'path' => $path,
+                'file_name' => $file->getClientOriginalName(), 'content_type' => $file->getMimeType() ?: 'application/octet-stream',
+                'file_size' => $file->getSize(),
+            ]);
+        }
         $item->update(['last_activity_at' => now()]);
 
-        $payload = MessagePayload::make($message->load(['conversation', 'sender']));
+        $payload = MessagePayload::make($message->load(['conversation', 'sender', 'attachments.message.sender']));
         RealtimePublisher::publish($account->id, 'message.created', $payload);
 
         return response()->json($payload);
@@ -55,6 +74,10 @@ class MessageController extends Controller
     {
         $item = $this->conversation($request, $account, $conversation);
         $this->scoped($item, $message);
+        foreach ($message->attachments as $attachment) {
+            Storage::disk($attachment->disk)->delete($attachment->path);
+        }
+        $message->attachments()->delete();
         $message->update(['content' => 'This message was deleted', 'content_type' => 'text', 'content_attributes' => ['deleted' => true]]);
 
         return response()->json(MessagePayload::make($message));
@@ -79,6 +102,6 @@ class MessageController extends Controller
     private function scoped(Conversation $conversation, Message $message): void
     {
         abort_unless($message->conversation_id === $conversation->id, 404);
-        $message->loadMissing(['conversation', 'sender']);
+        $message->loadMissing(['conversation', 'sender', 'attachments.message.sender']);
     }
 }

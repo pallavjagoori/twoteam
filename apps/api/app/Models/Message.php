@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['account_id', 'inbox_id', 'sender_id', 'content', 'echo_id', 'message_type', 'content_type', 'status', 'content_attributes', 'private', 'source_id', 'external_error'])]
 class Message extends Model
@@ -22,6 +23,11 @@ class Message extends Model
     public function inbox(): BelongsTo
     {
         return $this->belongsTo(Inbox::class);
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class);
     }
 
     protected function casts(): array

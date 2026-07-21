@@ -33,7 +33,7 @@ assigned.
 | Messages | @pallavjagoori | Complete | Complete | History, replies, notes, delivery, retry and deletion | Complete | Complete | Not started |
 | Labels and assignments | @pallavjagoori | Complete | Complete | Label CRUD, tagging and agent/team assignment | Complete | Complete | Not started |
 | Realtime transport | @pallavjagoori | Complete | Complete | Durable cursor-based event outbox | Complete | In progress | In progress |
-| Attachments | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
+| Attachments | @pallavjagoori | Complete | Complete | Private storage, signed downloads, limits and deletion cleanup | Complete | In progress | In progress |
 | Website widget | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Notifications | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Canned responses and macros | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
