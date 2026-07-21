@@ -13,6 +13,7 @@ const webRoot = fileURLToPath(new URL('.', import.meta.url));
 const repositoryRoot = path.resolve(webRoot, '../..');
 const chatwootRoot = path.resolve(repositoryRoot, 'upstream/chatwoot');
 const javascriptRoot = path.resolve(chatwootRoot, 'app/javascript');
+const runtimeAdapter = path.resolve(webRoot, 'src/adapters/chatwootRuntime.ts');
 const entrypoint = (name: string) =>
   path.resolve(javascriptRoot, `entrypoints/${name}.js`);
 const tailwindConfig = loadTailwindConfig(
@@ -39,10 +40,26 @@ const aliases = {
   assets: path.resolve(javascriptRoot, 'dashboard/assets'),
 };
 
+const railsReplacementAdapter = () => ({
+  name: 'twoteam-rails-replacement-adapter',
+  enforce: 'pre' as const,
+  transform(code: string, id: string) {
+    if (!id.startsWith(`${javascriptRoot}${path.sep}entrypoints${path.sep}`)) {
+      return null;
+    }
+
+    return {
+      code: `import ${JSON.stringify(runtimeAdapter)};\n${code}`,
+      map: null,
+    };
+  },
+});
+
 export default defineConfig({
   root: chatwootRoot,
   publicDir: false,
   plugins: [
+    railsReplacementAdapter(),
     vue({
       template: {
         compilerOptions: {
