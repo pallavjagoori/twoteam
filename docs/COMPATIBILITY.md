@@ -23,7 +23,7 @@ assigned.
 
 | Domain | Owner | HTTP | Database | Jobs | Realtime | Browser | Overall |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Authentication | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
+| Authentication | @pallavjagoori | In progress | In progress | Not started | N/A | Not started | In progress |
 | Accounts | @pallavjagoori | Not started | Not started | N/A | Not started | Not started | Not started |
 | Authorization | @pallavjagoori | Not started | N/A | N/A | N/A | Not started | Not started |
 | Teams and agents | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
