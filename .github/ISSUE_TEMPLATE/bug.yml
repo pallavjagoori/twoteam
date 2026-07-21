@@ -1,0 +1,48 @@
+name: Twoteam defect
+description: Report incorrect behavior that is not an upstream compatibility gap.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Observed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Twoteam version or commit
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Critical - security, data loss, or complete outage
+        - High - core workflow unavailable
+        - Medium - workflow degraded with a workaround
+        - Low - minor behavior or presentation issue
+    validations:
+      required: true
+  - type: textarea
+    id: tenancy
+    attributes:
+      label: Security and account-isolation impact
+      description: State whether another account's data could be involved.
+    validations:
+      required: true

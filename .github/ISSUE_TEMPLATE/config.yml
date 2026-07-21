@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Project roadmap
+    url: https://github.com/pallavjagoori/twoteam/blob/main/docs/PROJECT_PLAN.md
+    about: Review planned migration increments and their completion criteria.
+  - name: Compatibility dashboard
+    url: https://github.com/pallavjagoori/twoteam/blob/main/docs/COMPATIBILITY.md
+    about: Review the current compatibility status by domain.
