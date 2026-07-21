@@ -6,6 +6,8 @@ on:
       - ".github/**"
       - "docs/**"
       - "scripts/validate-governance.sh"
+      - "scripts/validate-upstream.sh"
+      - "upstream/**"
       - "README.md"
   push:
     branches:
@@ -14,6 +16,8 @@ on:
       - ".github/**"
       - "docs/**"
       - "scripts/validate-governance.sh"
+      - "scripts/validate-upstream.sh"
+      - "upstream/**"
       - "README.md"
 
 permissions:
@@ -27,3 +31,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Validate governance files
         run: bash scripts/validate-governance.sh
+      - name: Validate upstream snapshot
+        if: ${{ hashFiles('upstream/CHATWOOT_VERSION') != '' }}
+        run: bash scripts/validate-upstream.sh
