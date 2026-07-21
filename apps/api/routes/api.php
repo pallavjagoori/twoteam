@@ -9,6 +9,7 @@ use App\Http\Controllers\ConversationLabelController;
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LabelController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\RealtimeController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,8 @@ Route::get('/health', function () {
         'service' => 'twoteam-api',
     ]);
 });
+Route::get('/cable/events', [RealtimeController::class, 'index']);
+Route::post('/cable/presence', [RealtimeController::class, 'presence']);
 
 Route::middleware('chatwoot.auth')->group(function () {
     Route::get('/v1/accounts/{account}', [AccountController::class, 'show']);

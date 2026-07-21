@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Support\RealtimePublisher;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -17,7 +18,10 @@ class AssignmentController extends Controller
             $assignee = $account->users()->whereKey($request->input('assignee_id'))->first();
             $item->update(['assignee_id' => $assignee?->id]);
 
-            return response()->json($assignee ? ['id' => $assignee->id, 'name' => $assignee->name, 'email' => $assignee->email] : null);
+            $payload = $assignee ? ['id' => $assignee->id, 'name' => $assignee->name, 'email' => $assignee->email] : null;
+            RealtimePublisher::publish($account->id, 'conversation.updated', ['id' => $item->display_id, 'assignee' => $payload]);
+
+            return response()->json($payload);
         }
         if ($request->has('team_id')) {
             $team = $account->teams()->whereKey($request->input('team_id'))->first();
