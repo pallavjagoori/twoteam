@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\ConversationLabelController;
 use App\Http\Controllers\InboxController;
+use App\Http\Controllers\LabelController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +35,8 @@ Route::middleware('chatwoot.auth')->group(function () {
     Route::apiResource('/v1/accounts/{account}/conversations', ConversationController::class)->except('destroy')->parameters(['conversations' => 'conversation']);
     Route::post('/v1/accounts/{account}/conversations/{conversation}/messages/{message}/retry', [MessageController::class, 'retry']);
     Route::apiResource('/v1/accounts/{account}/conversations/{conversation}/messages', MessageController::class)->except('show')->parameters(['messages' => 'message']);
+    Route::post('/v1/accounts/{account}/conversations/{conversation}/assignments', [AssignmentController::class, 'store']);
+    Route::get('/v1/accounts/{account}/conversations/{conversation}/labels', [ConversationLabelController::class, 'index']);
+    Route::post('/v1/accounts/{account}/conversations/{conversation}/labels', [ConversationLabelController::class, 'store']);
+    Route::apiResource('/v1/accounts/{account}/labels', LabelController::class)->parameters(['labels' => 'label']);
 });
