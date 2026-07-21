@@ -17,6 +17,7 @@ yet.
 - [Local development](docs/LOCAL_DEVELOPMENT.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Frontend compatibility adapters](docs/FRONTEND_ADAPTERS.md)
+- [Frontend endpoint and dependency inventory](docs/FRONTEND_INVENTORY.md)
 - [Development standards](docs/DEVELOPMENT.md)
 - [Definition of Done](docs/DEFINITION_OF_DONE.md)
 - [Architecture decisions](docs/adr/README.md)
