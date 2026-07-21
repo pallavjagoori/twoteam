@@ -27,7 +27,7 @@ assigned.
 | Accounts | @pallavjagoori | Complete | Complete | Membership bootstrap, policy branches and tenant isolation | In progress | Complete | Not started |
 | Authorization | @pallavjagoori | Not started | N/A | N/A | N/A | Not started | Not started |
 | Teams and agents | @pallavjagoori | Complete | Complete | Agent availability, team CRUD and tenant isolation | In progress | Complete | Not started |
-| Contacts | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
+| Contacts | @pallavjagoori | Complete | Complete | CRUD, search, pagination and tenant isolation | In progress | Complete | Not started |
 | Inboxes | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Conversations | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Messages | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |

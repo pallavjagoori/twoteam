@@ -15,6 +15,11 @@ class Account extends Model
         return $this->hasMany(Team::class);
     }
 
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(Contact::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'account_users')
