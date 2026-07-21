@@ -6,11 +6,11 @@
 | --- | --- |
 | Current phase | Governance and repository foundation |
 | Completed roadmap work | PR 001 foundation bootstrap |
-| In progress | PR 002 project tracking and templates |
+| In progress | PR 002 project tracking and PR 003 upstream import |
 | Completion on `main` | 1% |
 | Completion after this PR | 2% |
 | First usable release target | PR 022 website widget |
-| Supported Chatwoot version | Not selected yet |
+| Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
 
 Progress changes only when a roadmap deliverable is merged and satisfies the
@@ -23,7 +23,7 @@ requests do not count as completed progress.
 | ---: | --- | ---: | --- | --- |
 | 001 | Architecture and development baseline | 1% | Complete | Commit `82557bf` on `main` |
 | 002 | Tracking dashboard, issue and PR templates | 2% | In progress | Current change |
-| 003 | Import pinned Chatwoot source | 5% | Not started | — |
+| 003 | Import pinned Chatwoot source | 5% | In progress | Chatwoot `v4.16.0` source and integrity metadata |
 | 004 | Scaffold Laravel, Vite, PostgreSQL and Redis | 7% | Not started | — |
 | 005 | Build unmodified Chatwoot frontend | 10% | Not started | — |
 | 006 | Add Rails-replacement adapters | 15% | Not started | — |
