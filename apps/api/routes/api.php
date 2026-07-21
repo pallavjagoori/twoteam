@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,7 @@ Route::middleware('chatwoot.auth')->group(function () {
     Route::apiResource('/v1/accounts/{account}/contacts', ContactController::class)->parameters(['contacts' => 'contact']);
     Route::post('/v1/accounts/{account}/inboxes/{inbox}/reset_secret', [InboxController::class, 'resetSecret']);
     Route::apiResource('/v1/accounts/{account}/inboxes', InboxController::class)->parameters(['inboxes' => 'inbox']);
+    Route::post('/v1/accounts/{account}/conversations/{conversation}/toggle_status', [ConversationController::class, 'toggleStatus']);
+    Route::post('/v1/accounts/{account}/conversations/{conversation}/toggle_priority', [ConversationController::class, 'togglePriority']);
+    Route::apiResource('/v1/accounts/{account}/conversations', ConversationController::class)->except('destroy')->parameters(['conversations' => 'conversation']);
 });

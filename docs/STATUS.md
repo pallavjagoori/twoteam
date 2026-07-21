@@ -6,9 +6,9 @@
 | --- | --- |
 | Current phase | Authentication and tenancy |
 | Completed roadmap work | PRs 001-011: authentication complete |
-| In progress | PR 016 inboxes and channel abstraction |
-| Completion on `main` | 41% |
-| Completion after this PR | 44% |
+| In progress | PR 017 conversations |
+| Completion on `main` | 44% |
+| Completion after this PR | 49% |
 | First usable release target | PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -37,7 +37,7 @@ requests do not count as completed progress.
 | 014 | Teams, agents and availability | 38% | Complete | 18 tests, 77 assertions, 100% Laravel coverage; agent availability and team CRUD pass |
 | 015 | Contacts | 41% | Complete | 21 tests, 99 assertions, 100% Laravel coverage; contact CRUD, search, pagination and isolation pass |
 | 016 | Inboxes and channel abstraction | 44% | Complete | 23 tests, 122 assertions, 100% coverage; Website Widget/API inbox workflows pass |
-| 017 | Conversations | 49% | Not started | — |
+| 017 | Conversations | 49% | Complete | 25 tests, 148 assertions, 100% coverage; inbox list, status and priority pass |
 | 018 | Messages | 55% | Not started | — |
 | 019 | Labels and assignments | 60% | Not started | — |
 | 020 | Realtime transport | 64% | Not started | — |
