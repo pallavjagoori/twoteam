@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "outgoing-message-created",
+  "effects": {
+    "jobs": [
+      {
+        "name": "SendReplyJob",
+        "queue": "default",
+        "arguments": {
+          "message_id": 10001
+        }
+      }
+    ],
+    "mail": [
+      {
+        "mailer": "ConversationReplyMailer",
+        "action": "email_reply",
+        "to": ["contact@twoteam.test"],
+        "subject": "New message in Reference Inbox"
+      }
+    ],
+    "webhooks": [
+      {
+        "event": "message_created",
+        "method": "POST",
+        "url": "https://hooks.twoteam.test/chatwoot",
+        "body": {
+          "event": "message_created",
+          "id": 10001,
+          "conversation": {
+            "id": 10001
+          }
+        }
+      }
+    ],
+    "realtime": [
+      {
+        "event": "message.created",
+        "stream": "account:10001",
+        "payload": {
+          "id": 10001,
+          "conversation_id": 10001
+        }
+      }
+    ]
+  }
+}

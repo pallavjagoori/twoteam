@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Current phase | Compatibility infrastructure |
-| Completed roadmap work | PRs 001-008: foundation through reproducible Rails reference |
-| In progress | PR 009 HTTP differential testing |
-| Completion on `main` | 19% |
-| Completion after this PR | 22% |
+| Completed roadmap work | PRs 001-009: foundation through HTTP differential testing |
+| In progress | PR 010 job, mail, webhook and realtime contracts |
+| Completion on `main` | 22% |
+| Completion after this PR | 25% |
 | First usable release target | PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -29,8 +29,8 @@ requests do not count as completed progress.
 | 006 | Add Rails-replacement adapters | 15% | Complete | Tested runtime adapter injected into all upstream entry points |
 | 007 | Endpoint and dependency inventory | 17% | Complete | 306 request sites and 71 package imports tracked by CI |
 | 008 | Reproducible Rails reference | 19% | Complete | Pinned Rails image and deterministic fixture fingerprint on `main` |
-| 009 | HTTP differential testing | 22% | In progress | Status, header and body comparison runner with failure-mode tests |
-| 010 | Job, mail, webhook and realtime contracts | 25% | Not started | — |
+| 009 | HTTP differential testing | 22% | Complete | Status, header and body comparison with CI failure-mode tests |
+| 010 | Job, mail, webhook and realtime contracts | 25% | In progress | Common schema, validator and four-category message scenario |
 | 011 | Users and authentication | 28% | Not started | — |
 | 012 | Accounts and memberships | 31% | Not started | — |
 | 013 | Authorization policies | 35% | Not started | — |

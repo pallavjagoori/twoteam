@@ -33,7 +33,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - run: node --test tests/contracts/http-differential.test.mjs
+      - run: node --test tests/contracts/*.test.mjs
+      - run: node scripts/side-effect-contracts.mjs contracts/side-effects/*.json
 
   api:
     runs-on: ubuntu-latest
