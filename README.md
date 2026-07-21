@@ -21,6 +21,7 @@ yet.
 - [Reproducible Rails reference](docs/RAILS_REFERENCE.md)
 - [HTTP differential testing](docs/HTTP_DIFFERENTIAL_TESTING.md)
 - [Side-effect contracts](docs/SIDE_EFFECT_CONTRACTS.md)
+- [Authentication compatibility](docs/AUTHENTICATION.md)
 - [Development standards](docs/DEVELOPMENT.md)
 - [Definition of Done](docs/DEFINITION_OF_DONE.md)
 - [Architecture decisions](docs/adr/README.md)
