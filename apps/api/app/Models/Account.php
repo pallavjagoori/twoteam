@@ -30,6 +30,11 @@ class Account extends Model
         return $this->hasMany(Inbox::class);
     }
 
+    public function conversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'account_users')
