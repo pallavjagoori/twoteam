@@ -15,6 +15,7 @@
     }
   },
   "scripts": {
+    "contracts:http:test": "node --test tests/contracts/http-differential.test.mjs",
     "web:build": "corepack pnpm --filter @twoteam/web build",
     "web:chatwoot": "corepack pnpm --filter @twoteam/web build:chatwoot",
     "web:dev": "corepack pnpm --filter @twoteam/web dev",
