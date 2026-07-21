@@ -5,10 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['name', 'locale', 'domain', 'support_email', 'status', 'settings', 'custom_attributes', 'features'])]
 class Account extends Model
 {
+    public function teams(): HasMany
+    {
+        return $this->hasMany(Team::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'account_users')

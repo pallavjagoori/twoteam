@@ -55,7 +55,7 @@ jobs:
           coverage: pcov
       - run: composer install --no-interaction --prefer-dist
       - run: vendor/bin/pint --test
-      - run: php artisan test --coverage --min=85
+      - run: php artisan test --coverage --min=100
 
   web:
     runs-on: ubuntu-latest

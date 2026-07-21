@@ -31,7 +31,7 @@ Port the pinned Chatwoot frontend to a Laravel backend without editing
 
 - Add positive, negative, authorization, and tenant-isolation tests for each
   backend behavior.
-- Maintain at least 85% measured Laravel coverage; require 100% coverage for
+- Maintain 100% measured Laravel line coverage for every roadmap PR, including
   authorization policies and security-critical branches.
 - Run formatting, Laravel tests, contract tests, Vue host tests/build, unchanged
   Chatwoot frontend build, upstream-integrity, and infrastructure validation as

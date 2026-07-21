@@ -32,7 +32,7 @@ A feature is complete only when every applicable item below is satisfied.
 - [ ] Differential tests pass.
 - [ ] The critical browser workflow passes.
 - [ ] Static analysis and formatting pass.
-- [ ] Changed Laravel code has at least 90% line coverage.
+- [ ] The complete Laravel application has 100% measured line coverage.
 - [ ] Changed domain logic has at least 85% branch coverage.
 - [ ] Critical mutation-testing targets pass where applicable.
 
