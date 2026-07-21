@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\ConversationLabelController;
@@ -21,6 +22,7 @@ Route::get('/health', function () {
 });
 Route::get('/cable/events', [RealtimeController::class, 'index']);
 Route::post('/cable/presence', [RealtimeController::class, 'presence']);
+Route::get('/attachments/{attachment}/download', [AttachmentController::class, 'download'])->middleware('signed')->name('attachments.download');
 
 Route::middleware('chatwoot.auth')->group(function () {
     Route::get('/v1/accounts/{account}', [AccountController::class, 'show']);
@@ -35,6 +37,7 @@ Route::middleware('chatwoot.auth')->group(function () {
     Route::apiResource('/v1/accounts/{account}/inboxes', InboxController::class)->parameters(['inboxes' => 'inbox']);
     Route::post('/v1/accounts/{account}/conversations/{conversation}/toggle_status', [ConversationController::class, 'toggleStatus']);
     Route::post('/v1/accounts/{account}/conversations/{conversation}/toggle_priority', [ConversationController::class, 'togglePriority']);
+    Route::get('/v1/accounts/{account}/conversations/{conversation}/attachments', [AttachmentController::class, 'index']);
     Route::apiResource('/v1/accounts/{account}/conversations', ConversationController::class)->except('destroy')->parameters(['conversations' => 'conversation']);
     Route::post('/v1/accounts/{account}/conversations/{conversation}/messages/{message}/retry', [MessageController::class, 'retry']);
     Route::apiResource('/v1/accounts/{account}/conversations/{conversation}/messages', MessageController::class)->except('show')->parameters(['messages' => 'message']);
