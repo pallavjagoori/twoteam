@@ -1,0 +1,67 @@
+name: Compatibility gap
+description: Report behavior that differs from the pinned Chatwoot reference.
+title: "[Compatibility]: "
+labels:
+  - compatibility
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe observable behavior. Do not report a difference based only on
+        internal implementation structure.
+  - type: input
+    id: domain
+    attributes:
+      label: Domain
+      description: Authentication, conversations, messages, widget, channel, or another dashboard domain.
+    validations:
+      required: true
+  - type: input
+    id: chatwoot-version
+    attributes:
+      label: Chatwoot version or commit
+      description: Identify the reference behavior being compared.
+    validations:
+      required: true
+  - type: textarea
+    id: reference-behavior
+    attributes:
+      label: Chatwoot behavior
+      description: Include request, response, event or browser-flow evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: twoteam-behavior
+    attributes:
+      label: Twoteam behavior
+      description: Explain how Twoteam differs.
+    validations:
+      required: true
+  - type: dropdown
+    id: contract
+    attributes:
+      label: Contract type
+      options:
+        - HTTP
+        - Authentication or authorization
+        - Database effect
+        - Job or mail
+        - Realtime event
+        - Webhook
+        - Browser workflow
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: security
+    attributes:
+      label: Security and account-isolation impact
+      description: State whether the gap could expose data or bypass authorization.
+    validations:
+      required: true

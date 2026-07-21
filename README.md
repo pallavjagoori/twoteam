@@ -11,6 +11,8 @@ yet.
 ## Documentation
 
 - [Project plan](docs/PROJECT_PLAN.md)
+- [Current status](docs/STATUS.md)
+- [Compatibility dashboard](docs/COMPATIBILITY.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Development standards](docs/DEVELOPMENT.md)
 - [Definition of Done](docs/DEFINITION_OF_DONE.md)

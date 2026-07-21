@@ -1,0 +1,50 @@
+name: Chatwoot upstream update
+description: Track evaluation and integration of a Chatwoot release or commit.
+title: "[Upstream]: Chatwoot "
+labels:
+  - upstream
+body:
+  - type: input
+    id: current
+    attributes:
+      label: Current Chatwoot version or commit
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Target Chatwoot version or commit
+    validations:
+      required: true
+  - type: textarea
+    id: frontend
+    attributes:
+      label: Frontend changes
+      description: Summarize Vue, state, routing, dependency, translation and asset changes.
+    validations:
+      required: true
+  - type: textarea
+    id: backend
+    attributes:
+      label: Backend contract changes
+      description: List endpoints, payload fields, migrations, jobs, callbacks and events.
+    validations:
+      required: true
+  - type: checkboxes
+    id: gates
+    attributes:
+      label: Compatibility gates
+      options:
+        - label: Upstream frontend builds.
+        - label: Upstream frontend tests pass.
+        - label: New Rails-specific imports are classified.
+        - label: API usage changes are registered.
+        - label: Database migrations are translated.
+        - label: Differential tests pass.
+        - label: Critical browser workflows pass.
+        - label: Compatibility dashboard is updated.
+  - type: textarea
+    id: unsupported
+    attributes:
+      label: Unsupported or deferred behavior
+      description: State what will not ship with this update and why.
