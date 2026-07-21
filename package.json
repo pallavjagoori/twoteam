@@ -1,0 +1,13 @@
+{
+  "name": "twoteam",
+  "private": true,
+  "packageManager": "pnpm@10.2.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "web:build": "corepack pnpm --filter @twoteam/web build",
+    "web:dev": "corepack pnpm --filter @twoteam/web dev",
+    "web:test": "corepack pnpm --filter @twoteam/web test"
+  }
+}
