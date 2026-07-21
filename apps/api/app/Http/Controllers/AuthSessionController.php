@@ -73,10 +73,23 @@ class AuthSessionController extends Controller
 
     private function userPayload(User $user): array
     {
+        $accounts = $user->accounts()->orderBy('accounts.id')->get()->map(fn ($account) => [
+            'id' => $account->id,
+            'name' => $account->name,
+            'active_at' => $account->pivot->active_at,
+            'role' => $account->pivot->role,
+            'availability' => $account->pivot->availability,
+            'auto_offline' => (bool) $account->pivot->auto_offline,
+            'permissions' => $account->pivot->permissions ? json_decode($account->pivot->permissions, true) : [],
+            'locale' => $account->locale,
+            'status' => $account->status,
+        ])->values();
+        $activeAccount = $accounts->first();
+
         return [
             'access_token' => '',
-            'account_id' => null,
-            'accounts' => [],
+            'account_id' => $activeAccount['id'] ?? null,
+            'accounts' => $accounts,
             'available_name' => $user->display_name ?: $user->name,
             'avatar_url' => '',
             'confirmed' => $user->email_verified_at !== null,
@@ -86,7 +99,7 @@ class AuthSessionController extends Controller
             'name' => $user->name,
             'provider' => $user->provider,
             'pubsub_token' => $user->pubsub_token,
-            'role' => null,
+            'role' => $activeAccount['role'] ?? null,
             'settings' => [],
             'type' => $user->type,
             'uid' => $user->uid ?: $user->email,
