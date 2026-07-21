@@ -19,6 +19,12 @@ reference-verify:
 reference-down:
 	docker compose -f infrastructure/reference/compose.yml down
 
+contracts-http-test:
+	node --test tests/contracts/http-differential.test.mjs
+
+contracts-http-run:
+	node scripts/http-differential.mjs
+
 api-dev:
 	cd apps/api && php artisan serve
 
@@ -28,6 +34,7 @@ web-dev:
 test:
 	cd apps/api && php artisan test
 	corepack pnpm web:test
+	node --test tests/contracts/http-differential.test.mjs
 	corepack pnpm web:chatwoot
 	bash scripts/validate-governance.sh
 	bash scripts/validate-upstream.sh

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "scenarios": [
+    {
+      "id": "service-health",
+      "reference": {
+        "method": "GET",
+        "path": "/health"
+      },
+      "candidate": {
+        "method": "GET",
+        "path": "/api/health"
+      },
+      "normalization": {
+        "ignoreJsonPointers": [
+          "/service",
+          "/status"
+        ]
+      }
+    }
+  ]
+}
