@@ -2,7 +2,7 @@
 
 setup:
 	cd apps/api && composer install
-	corepack pnpm install
+	corepack pnpm install --ignore-scripts
 
 infra-up:
 	docker compose -f infrastructure/compose.yml up -d --wait
@@ -19,5 +19,6 @@ web-dev:
 test:
 	cd apps/api && php artisan test
 	corepack pnpm web:test
+	corepack pnpm web:chatwoot
 	bash scripts/validate-governance.sh
 	bash scripts/validate-upstream.sh

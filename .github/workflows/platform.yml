@@ -49,9 +49,10 @@ jobs:
           node-version: 24
       - run: corepack enable
       - run: corepack install
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm web:test
       - run: pnpm web:build
+      - run: pnpm web:chatwoot
 
   infrastructure:
     runs-on: ubuntu-latest
