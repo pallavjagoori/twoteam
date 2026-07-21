@@ -8,8 +8,10 @@ required_files=(
   docs/COMPATIBILITY.md
   docs/DEFINITION_OF_DONE.md
   docs/DEVELOPMENT.md
+  docs/FRONTEND_INVENTORY.md
   docs/PROJECT_PLAN.md
   docs/STATUS.md
+  contracts/frontend/inventory.json
   docs/adr/README.md
   .github/CODEOWNERS
   .github/PULL_REQUEST_TEMPLATE.md
