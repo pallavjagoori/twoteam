@@ -35,6 +35,11 @@ class Account extends Model
         return $this->hasMany(Conversation::class);
     }
 
+    public function labels(): HasMany
+    {
+        return $this->hasMany(Label::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'account_users')
