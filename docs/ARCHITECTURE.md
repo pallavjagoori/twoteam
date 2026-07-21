@@ -38,6 +38,9 @@ that it matches the recorded upstream commit.
 `apps/web` builds Chatwoot's original Vue entry points and provides a narrow
 integration layer. Vite aliases and adapters replace Rails-specific facilities:
 
+The concrete browser runtime contract is documented in
+[`FRONTEND_ADAPTERS.md`](FRONTEND_ADAPTERS.md).
+
 | Chatwoot expectation | Twoteam adapter |
 | --- | --- |
 | Rails-configured Axios | Laravel API client bootstrap |

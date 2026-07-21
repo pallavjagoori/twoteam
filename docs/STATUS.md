@@ -6,7 +6,7 @@
 | --- | --- |
 | Current phase | Governance and repository foundation |
 | Completed roadmap work | PR 001 foundation bootstrap |
-| In progress | PRs 002-005: tracking through upstream frontend build |
+| In progress | PRs 002-006: tracking through Rails-replacement adapters |
 | Completion on `main` | 1% |
 | Completion after this PR | 2% |
 | First usable release target | PR 022 website widget |
@@ -26,7 +26,7 @@ requests do not count as completed progress.
 | 003 | Import pinned Chatwoot source | 5% | In progress | Chatwoot `v4.16.0` source and integrity metadata |
 | 004 | Scaffold Laravel, Vite, PostgreSQL and Redis | 7% | In progress | Laravel 13, Vue host and local infrastructure |
 | 005 | Build unmodified Chatwoot frontend | 10% | In progress | Twoteam Vite configuration for all upstream entry points |
-| 006 | Add Rails-replacement adapters | 15% | Not started | — |
+| 006 | Add Rails-replacement adapters | 15% | In progress | Typed runtime configuration injected before every upstream entry point |
 | 007 | Endpoint and dependency inventory | 17% | Not started | — |
 | 008 | Reproducible Rails reference | 19% | Not started | — |
 | 009 | HTTP differential testing | 22% | Not started | — |
