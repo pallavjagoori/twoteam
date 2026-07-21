@@ -5,8 +5,18 @@
   "engines": {
     "node": "24.x"
   },
+  "pnpm": {
+    "overrides": {
+      "minimatch@<4": "3.1.5",
+      "minimatch@>=9.0.0 <9.0.7": "9.0.9",
+      "rollup": ">=4.59.0",
+      "vite": "6.4.2",
+      "vitest": "3.0.5"
+    }
+  },
   "scripts": {
     "web:build": "corepack pnpm --filter @twoteam/web build",
+    "web:chatwoot": "corepack pnpm --filter @twoteam/web build:chatwoot",
     "web:dev": "corepack pnpm --filter @twoteam/web dev",
     "web:test": "corepack pnpm --filter @twoteam/web test"
   }

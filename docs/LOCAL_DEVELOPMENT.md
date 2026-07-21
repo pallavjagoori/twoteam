@@ -67,6 +67,7 @@ make web-dev
 ```bash
 make test
 corepack pnpm web:build
+corepack pnpm web:chatwoot
 docker compose -f infrastructure/compose.yml config --quiet
 ```
 
