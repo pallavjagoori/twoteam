@@ -1,0 +1,111 @@
+name: twoteam-reference
+
+x-chatwoot-image: &chatwoot-image chatwoot/chatwoot:v4.16.0@sha256:64eafea4d4e8e73dcc534f7012cc93c0b04635f235861eda2d588d1f33166827
+x-chatwoot-environment: &chatwoot-environment
+  RAILS_ENV: production
+  NODE_ENV: production
+  INSTALLATION_ENV: docker
+  SECRET_KEY_BASE: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+  FRONTEND_URL: http://127.0.0.1:3100
+  POSTGRES_HOST: postgres
+  POSTGRES_DATABASE: chatwoot_reference
+  POSTGRES_USERNAME: chatwoot
+  POSTGRES_PASSWORD: chatwoot-reference
+  REDIS_URL: redis://:chatwoot-reference@redis:6379
+  REDIS_PASSWORD: chatwoot-reference
+  RAILS_LOG_TO_STDOUT: "true"
+  LOG_LEVEL: warn
+  ENABLE_ACCOUNT_SIGNUP: "false"
+  ACTIVE_STORAGE_SERVICE: local
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16@sha256:1d533553fefe4f12e5d80c7b80622ba0c382abb5758856f52983d8789179f0fb
+    environment:
+      POSTGRES_DB: chatwoot_reference
+      POSTGRES_USER: chatwoot
+      POSTGRES_PASSWORD: chatwoot-reference
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U chatwoot -d chatwoot_reference]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.4-alpine@sha256:6ab0b6e7381779332f97b8ca76193e45b0756f38d4c0dcda72dbb3c32061ab99
+    command: [redis-server, --requirepass, chatwoot-reference]
+    healthcheck:
+      test: [CMD, redis-cli, -a, chatwoot-reference, ping]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    volumes:
+      - redis-data:/data
+
+  prepare:
+    image: *chatwoot-image
+    environment: *chatwoot-environment
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: [bundle, exec, rails, db:chatwoot_prepare]
+    profiles: [tools]
+
+  seed:
+    image: *chatwoot-image
+    environment: *chatwoot-environment
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./seed.rb:/reference/seed.rb:ro
+      - ./verify.rb:/reference/verify.rb:ro
+    command: [bundle, exec, rails, runner, /reference/seed.rb]
+    profiles: [tools]
+
+  verify:
+    image: *chatwoot-image
+    environment: *chatwoot-environment
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./verify.rb:/reference/verify.rb:ro
+    command: [bundle, exec, rails, runner, /reference/verify.rb]
+    profiles: [tools]
+
+  rails:
+    image: *chatwoot-image
+    environment: *chatwoot-environment
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    entrypoint: docker/entrypoints/rails.sh
+    command: [bundle, exec, rails, server, -p, "3000", -b, 0.0.0.0]
+    ports:
+      - 127.0.0.1:3100:3000
+    healthcheck:
+      test:
+        - CMD
+        - ruby
+        - -rnet/http
+        - -e
+        - Net::HTTP.get_response(URI('http://127.0.0.1:3000/health')).is_a?(Net::HTTPSuccess) || exit(1)
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+volumes:
+  postgres-data:
+  redis-data:

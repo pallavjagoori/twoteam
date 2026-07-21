@@ -59,3 +59,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f infrastructure/compose.yml config --quiet
+      - run: docker compose -f infrastructure/reference/compose.yml config --quiet

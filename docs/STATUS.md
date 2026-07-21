@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Current phase | Compatibility infrastructure |
-| Completed roadmap work | PRs 001-006: foundation through Rails-replacement adapters |
-| In progress | PR 007 endpoint and dependency inventory |
-| Completion on `main` | 15% |
-| Completion after this PR | 17% |
+| Completed roadmap work | PRs 001-007: foundation through frontend inventory |
+| In progress | PR 008 reproducible Rails reference |
+| Completion on `main` | 17% |
+| Completion after this PR | 19% |
 | First usable release target | PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -27,8 +27,8 @@ requests do not count as completed progress.
 | 004 | Scaffold Laravel, Vite, PostgreSQL and Redis | 7% | Complete | Laravel 13, Vue host and local infrastructure on `main` |
 | 005 | Build unmodified Chatwoot frontend | 10% | Complete | All upstream entry points compile in CI |
 | 006 | Add Rails-replacement adapters | 15% | Complete | Tested runtime adapter injected into all upstream entry points |
-| 007 | Endpoint and dependency inventory | 17% | In progress | Generated request and package baseline with CI drift detection |
-| 008 | Reproducible Rails reference | 19% | Not started | — |
+| 007 | Endpoint and dependency inventory | 17% | Complete | 306 request sites and 71 package imports tracked by CI |
+| 008 | Reproducible Rails reference | 19% | In progress | Pinned Rails image, isolated services and verified deterministic fixtures |
 | 009 | HTTP differential testing | 22% | Not started | — |
 | 010 | Job, mail, webhook and realtime contracts | 25% | Not started | — |
 | 011 | Users and authentication | 28% | Not started | — |
