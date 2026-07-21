@@ -14,6 +14,7 @@ yet.
 - [Current status](docs/STATUS.md)
 - [Compatibility dashboard](docs/COMPATIBILITY.md)
 - [Pinned Chatwoot source](docs/UPSTREAM.md)
+- [Local development](docs/LOCAL_DEVELOPMENT.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Development standards](docs/DEVELOPMENT.md)
 - [Definition of Done](docs/DEFINITION_OF_DONE.md)
