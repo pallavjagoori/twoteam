@@ -6,20 +6,22 @@ use App\Models\Account;
 use App\Support\AccountPayload;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AccountController extends Controller
 {
     public function show(Request $request, Account $account): JsonResponse
     {
         $this->membership($request, $account);
+        Gate::forUser($request->user())->authorize('view', $account);
 
         return response()->json(AccountPayload::make($account));
     }
 
     public function update(Request $request, Account $account): JsonResponse
     {
-        $membership = $this->membership($request, $account);
-        abort_unless($membership->pivot->role === 'administrator', 403, 'You are not authorized to perform this action.');
+        $this->membership($request, $account);
+        Gate::forUser($request->user())->authorize('update', $account);
 
         $data = $request->validate([
             'name' => ['sometimes', 'string', 'max:255'],
@@ -36,6 +38,7 @@ class AccountController extends Controller
     public function active(Request $request, Account $account): JsonResponse
     {
         $membership = $this->membership($request, $account);
+        Gate::forUser($request->user())->authorize('updateActiveAt', $account);
         $membership->pivot->update(['active_at' => now()]);
 
         return response()->json([], 200);

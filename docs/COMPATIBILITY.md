@@ -24,7 +24,7 @@ assigned.
 | Domain | Owner | HTTP | Database | Jobs | Realtime | Browser | Overall |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Authentication | @pallavjagoori | In progress | In progress | Not started | N/A | Not started | In progress |
-| Accounts | @pallavjagoori | Complete | Complete | Membership bootstrap and tenant isolation | In progress | Complete | Not started |
+| Accounts | @pallavjagoori | Complete | Complete | Membership bootstrap, policy branches and tenant isolation | In progress | Complete | Not started |
 | Authorization | @pallavjagoori | Not started | N/A | N/A | N/A | Not started | Not started |
 | Teams and agents | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Contacts | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |

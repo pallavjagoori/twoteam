@@ -62,6 +62,16 @@ class AccountMembershipTest extends TestCase
         $this->assertNotNull($user->accounts()->first()->pivot->active_at);
     }
 
+    public function test_non_member_cannot_update_activity(): void
+    {
+        [$user] = $this->member('agent');
+        $other = Account::create(['name' => 'Other tenant']);
+
+        $this->withHeaders($this->login($user))
+            ->postJson("/api/v1/accounts/{$other->id}/update_active_at")
+            ->assertNotFound();
+    }
+
     private function member(string $role): array
     {
         $user = User::factory()->create([

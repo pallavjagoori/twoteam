@@ -6,9 +6,9 @@
 | --- | --- |
 | Current phase | Authentication and tenancy |
 | Completed roadmap work | PRs 001-011: authentication complete |
-| In progress | PR 012 accounts and memberships |
-| Completion on `main` | 28% |
-| Completion after this PR | 31% |
+| In progress | PR 013 authorization policies |
+| Completion on `main` | 31% |
+| Completion after this PR | 35% |
 | First usable release target | PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -33,7 +33,7 @@ requests do not count as completed progress.
 | 010 | Job, mail, webhook and realtime contracts | 25% | Complete | Four-category schema, scenario and CI validator on `main` |
 | 011 | Users and authentication | 28% | Complete | Compatible token headers, validation, revocation and 100% application coverage on `main` |
 | 012 | Accounts and memberships | 31% | Complete | 14 Laravel tests, 50 assertions, 100% coverage; membership bootstrap and tenant isolation pass |
-| 013 | Authorization policies | 35% | Not started | — |
+| 013 | Authorization policies | 35% | Complete | 16 tests, 57 assertions; account policy and application at 100% coverage |
 | 014 | Teams, agents and availability | 38% | Not started | — |
 | 015 | Contacts | 41% | Not started | — |
 | 016 | Inboxes and channel abstraction | 44% | Not started | — |
