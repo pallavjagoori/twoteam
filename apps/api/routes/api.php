@@ -9,6 +9,9 @@ use App\Http\Controllers\CannedResponseController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\ConversationLabelController;
+use App\Http\Controllers\CsatSurveyController;
+use App\Http\Controllers\HelpCenterArticleController;
+use App\Http\Controllers\HelpCenterCategoryController;
 use App\Http\Controllers\InboundEmailController;
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LabelController;
@@ -17,7 +20,9 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\MetaWebhookController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NotificationSettingController;
+use App\Http\Controllers\PortalController;
 use App\Http\Controllers\PrioritizedWebhookController;
+use App\Http\Controllers\PublicHelpCenterController;
 use App\Http\Controllers\RealtimeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
@@ -49,6 +54,10 @@ Route::post('/v1/whatsapp/webhook/{channel}', [WhatsappWebhookController::class,
 Route::get('/v1/meta/webhook/{channel}', [MetaWebhookController::class, 'verify']);
 Route::post('/v1/meta/webhook/{channel}', [MetaWebhookController::class, 'store']);
 Route::post('/v1/channels/webhook/{channel}', [PrioritizedWebhookController::class, 'store']);
+Route::get('/hc/{portal}/{locale}/articles.json', [PublicHelpCenterController::class, 'articles']);
+Route::get('/hc/{portal}/{locale}/articles/{article}', [PublicHelpCenterController::class, 'show']);
+Route::get('/public/v1/csat_survey/{survey:uuid}', [CsatSurveyController::class, 'show']);
+Route::patch('/public/v1/csat_survey/{survey:uuid}', [CsatSurveyController::class, 'update']);
 
 Route::middleware('chatwoot.auth')->group(function () {
     Route::get('/v1/accounts/{account}', [AccountController::class, 'show']);
@@ -90,6 +99,13 @@ Route::middleware('chatwoot.auth')->group(function () {
     Route::post('/v1/accounts/{account}/notifications/{notification}/snooze', [NotificationController::class, 'snooze']);
     Route::apiResource('/v1/accounts/{account}/notifications', NotificationController::class)->only(['index', 'update', 'destroy'])->parameters(['notifications' => 'notification']);
     Route::apiResource('/v1/accounts/{account}/webhooks', WebhookSubscriptionController::class)->except('show')->parameters(['webhooks' => 'webhookSubscription']);
+    Route::apiResource('/v1/accounts/{account}/portals', PortalController::class)->except('show')->parameters(['portals' => 'portal']);
+    Route::apiResource('/v1/portals/{portal:slug}/categories', HelpCenterCategoryController::class)->except('show')->parameters(['categories' => 'category']);
+    Route::apiResource('/v1/portals/{portal:slug}/articles', HelpCenterArticleController::class)->parameters(['articles' => 'article']);
+    Route::post('/v1/accounts/{account}/conversations/{conversation}/csat_survey', [CsatSurveyController::class, 'issue']);
+    Route::get('/v1/accounts/{account}/csat_survey_responses', [CsatSurveyController::class, 'index']);
+    Route::get('/v1/accounts/{account}/csat_survey_responses/metrics', [CsatSurveyController::class, 'metrics']);
+    Route::get('/v1/accounts/{account}/csat_survey_responses/download', [CsatSurveyController::class, 'download']);
     Route::get('/v2/accounts/{account}/reports', [ReportController::class, 'report']);
     Route::get('/v2/accounts/{account}/reports/summary', [ReportController::class, 'summary']);
     Route::get('/v2/accounts/{account}/reports/drilldown', [ReportController::class, 'drilldown']);

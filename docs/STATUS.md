@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Current phase | Operations and productivity |
-| Completed roadmap work | PRs 001-031: outgoing webhooks complete |
-| In progress | PR 032 reports |
-| Completion on `main` | 93% |
-| Completion after this PR | 95% |
+| Completed roadmap work | PRs 001-032: reports complete |
+| In progress | PR 033 Help Center and CSAT |
+| Completion on `main` | 95% |
+| Completion after this PR | 97% |
 | First usable release target | Achieved by PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -53,7 +53,7 @@ requests do not count as completed progress.
 | 030 | Telegram, LINE and SMS | 91% | Complete | 59 API tests, 609 assertions, 100% coverage; provider ingestion, outgoing jobs, delivery state and isolation pass |
 | 031 | Outgoing webhooks and integrations | 93% | Complete | 62 API tests, 637 assertions, 100% coverage; signing, event filtering, retries, logs and isolation pass |
 | 032 | Reports | 95% | Complete | 66 API tests, 703 assertions, 100% coverage; fixed datasets, v2 report shapes, CSV and 200-record performance gate pass |
-| 033 | Help Center and CSAT | 97% | Not started | — |
+| 033 | Help Center and CSAT | 97% | Complete | 70 API tests, 768 assertions, 100% coverage; draft-safe public content, authoring, immutable surveys, metrics and isolation pass |
 | 034 | Automated upstream-update workflow | 98% | Not started | — |
 | 035 | Production hardening | 99% | Not started | — |
 | 036 | Laravel cutover and Rails removal | 100% | Not started | — |

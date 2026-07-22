@@ -70,6 +70,16 @@ class Account extends Model
         return $this->hasMany(WebhookSubscription::class);
     }
 
+    public function portals(): HasMany
+    {
+        return $this->hasMany(Portal::class);
+    }
+
+    public function csatSurveyResponses(): HasMany
+    {
+        return $this->hasMany(CsatSurveyResponse::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'account_users')
