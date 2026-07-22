@@ -17,6 +17,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\MetaWebhookController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NotificationSettingController;
+use App\Http\Controllers\PrioritizedWebhookController;
 use App\Http\Controllers\RealtimeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TeamController;
@@ -45,6 +46,7 @@ Route::get('/v1/whatsapp/webhook/{channel}', [WhatsappWebhookController::class, 
 Route::post('/v1/whatsapp/webhook/{channel}', [WhatsappWebhookController::class, 'store']);
 Route::get('/v1/meta/webhook/{channel}', [MetaWebhookController::class, 'verify']);
 Route::post('/v1/meta/webhook/{channel}', [MetaWebhookController::class, 'store']);
+Route::post('/v1/channels/webhook/{channel}', [PrioritizedWebhookController::class, 'store']);
 
 Route::middleware('chatwoot.auth')->group(function () {
     Route::get('/v1/accounts/{account}', [AccountController::class, 'show']);
