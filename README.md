@@ -18,6 +18,7 @@ yet.
 - [Architecture](docs/ARCHITECTURE.md)
 - [Frontend compatibility adapters](docs/FRONTEND_ADAPTERS.md)
 - [Frontend endpoint and dependency inventory](docs/FRONTEND_INVENTORY.md)
+- [Latest upstream update analysis](docs/UPSTREAM_UPDATE_REPORT.md)
 - [Reproducible Rails reference](docs/RAILS_REFERENCE.md)
 - [HTTP differential testing](docs/HTTP_DIFFERENTIAL_TESTING.md)
 - [Side-effect contracts](docs/SIDE_EFFECT_CONTRACTS.md)

@@ -1,0 +1,52 @@
+name: Upstream update analysis
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/upstream-update.yml"
+      - "scripts/analyze-upstream-update.mjs"
+      - "tests/contracts/upstream-update-analysis.test.mjs"
+      - "upstream/**"
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: Chatwoot tag, branch, or commit to analyze
+        required: true
+        default: develop
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: chatwoot/chatwoot
+          ref: ${{ inputs.target_ref || 'develop' }}
+          path: .candidate-chatwoot
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test update analyzer
+        run: node --test tests/contracts/upstream-update-analysis.test.mjs
+      - name: Analyze compatibility delta
+        run: |
+          node scripts/analyze-upstream-update.mjs \
+            --baseline upstream/chatwoot \
+            --candidate .candidate-chatwoot \
+            --baseline-ref "$(sed -n 's/^RELEASE=//p' upstream/CHATWOOT_VERSION)" \
+            --candidate-ref "$(git -C .candidate-chatwoot rev-parse HEAD)" \
+            --json artifacts/upstream-update/report.json \
+            --markdown artifacts/upstream-update/report.md
+          cat artifacts/upstream-update/report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chatwoot-upstream-update-analysis
+          path: artifacts/upstream-update/
+          if-no-files-found: error

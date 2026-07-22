@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-22T04:17:35.326Z",
+  "baseline": {
+    "ref": "v4.16.0",
+    "version": "4.16.0"
+  },
+  "candidate": {
+    "ref": "89b83c65c843e87018fa2e6d190cf3fbc65c880e",
+    "version": "4.16.0"
+  },
+  "files": {
+    "added": [
+      "app/javascript/dashboard/api/calls.js",
+      "app/javascript/dashboard/api/captain/agentSessions.js",
+      "app/javascript/dashboard/components-next/Calls/CallListItem.vue",
+      "app/javascript/dashboard/components-next/Calls/CallRecordingPlayer.vue",
+      "app/javascript/dashboard/components-next/Calls/CallStatusBadge.vue",
+      "app/javascript/dashboard/components-next/Calls/CallsEmptyState.vue",
+      "app/javascript/dashboard/components-next/Calls/CallsFilterBar.vue",
+      "app/javascript/dashboard/components-next/Calls/constants.js",
+      "app/javascript/dashboard/components-next/audio/AudioPlayer.vue",
+      "app/javascript/dashboard/components-next/message/CaptainGenerationDetails.vue",
+      "app/javascript/dashboard/i18n/locale/en/calls.json",
+      "app/javascript/dashboard/routes/dashboard/calls/pages/CallsIndex.vue",
+      "app/javascript/dashboard/routes/dashboard/calls/routes.js",
+      "app/javascript/dashboard/store/captain/agentSessions.js",
+      "app/javascript/dashboard/stores/callHistory.js",
+      "app/javascript/dashboard/stores/specs/callHistory.spec.js",
+      "app/javascript/dashboard/stores/specs/companies.spec.js",
+      "enterprise/app/controllers/api/v1/accounts/captain/agent_sessions_controller.rb",
+      "enterprise/app/services/whatsapp/call_conversation_builder.rb",
+      "enterprise/app/services/whatsapp/call_permission_request_service.rb",
+      "enterprise/app/services/whatsapp/inbound_call_identity_builder.rb",
+      "enterprise/app/views/api/v1/accounts/captain/agent_sessions/show.json.jbuilder",
+      "spec/enterprise/controllers/api/v1/accounts/captain/agent_sessions_controller_spec.rb"
+    ],
+    "removed": [
+      "app/javascript/dashboard/stores/companies.spec.js"
+    ],
+    "modified": [
+      "app/controllers/api/v1/accounts/agent_bots_controller.rb",
+      "app/controllers/api/v1/accounts/captain/preferences_controller.rb",
+      "app/controllers/api/v1/accounts/labels_controller.rb",
+      "app/controllers/api/v1/accounts/whatsapp/authorizations_controller.rb",
+      "app/javascript/dashboard/api/captain/assistant.js",
+      "app/javascript/dashboard/api/channel/whatsapp/whatsappCallsAPI.js",
+      "app/javascript/dashboard/components-next/Contacts/VoiceCallButton.vue",
+      "app/javascript/dashboard/components-next/NewConversation/ComposeConversation.vue",
+      "app/javascript/dashboard/components-next/captain/pageComponents/overview/MetricCard.vue",
+      "app/javascript/dashboard/components-next/captain/pageComponents/overview/WelcomeCard.vue",
+      "app/javascript/dashboard/components-next/content-templates/ContentTemplateParser.vue",
+      "app/javascript/dashboard/components-next/message/bubbles/Base.vue",
+      "app/javascript/dashboard/components-next/message/bubbles/VoiceCall.vue",
+      "app/javascript/dashboard/components-next/popover/Popover.vue",
+      "app/javascript/dashboard/components-next/sidebar/Sidebar.vue",
+      "app/javascript/dashboard/components-next/whatsapp/WhatsAppTemplateParser.vue",
+      "app/javascript/dashboard/components/widgets/conversation/ConversationCallButton.vue",
+      "app/javascript/dashboard/composables/useWhatsappCallSession.js",
+      "app/javascript/dashboard/featureFlags.js",
+      "app/javascript/dashboard/helper/URLHelper.js",
+      "app/javascript/dashboard/helper/specs/templateHelper.spec.js",
+      "app/javascript/dashboard/helper/templateHelper.js",
+      "app/javascript/dashboard/i18n/locale/en/conversation.json",
+      "app/javascript/dashboard/i18n/locale/en/index.js",
+      "app/javascript/dashboard/i18n/locale/en/settings.json",
+      "app/javascript/dashboard/routes/dashboard/captain/assistants/overview/Index.vue",
+      "app/javascript/dashboard/routes/dashboard/dashboard.routes.js",
+      "app/javascript/dashboard/routes/dashboard/onboarding/inbox-setup/useChannelConfig.js",
+      "app/javascript/dashboard/routes/dashboard/settings/inbox/ChannelList.vue",
+      "app/javascript/dashboard/routes/dashboard/settings/inbox/Settings.vue",
+      "app/javascript/dashboard/routes/dashboard/settings/inbox/channels/Whatsapp.vue",
+      "app/javascript/dashboard/routes/dashboard/settings/inbox/components/SenderNameExamplePreview.vue",
+      "app/javascript/dashboard/routes/dashboard/settings/inbox/settingsPage/ConfigurationPage.vue",
+      "app/javascript/dashboard/store/index.js",
+      "app/javascript/dashboard/store/modules/inboxes.js",
+      "app/javascript/shared/composables/specs/useBranding.spec.js",
+      "app/javascript/shared/composables/useBranding.js",
+      "app/javascript/shared/helpers/specs/timeHelper.spec.js",
+      "app/javascript/shared/helpers/timeHelper.js",
+      "app/services/whatsapp/incoming_message_base_service.rb",
+      "config/features.yml",
+      "config/initializers/rack_attack.rb",
+      "config/routes.rb",
+      "enterprise/app/controllers/api/v1/accounts/captain/assistant_responses_controller.rb",
+      "enterprise/app/controllers/api/v1/accounts/captain/assistants_controller.rb",
+      "enterprise/app/controllers/api/v1/accounts/captain/bulk_actions_controller.rb",
+      "enterprise/app/controllers/api/v1/accounts/captain/custom_tools_controller.rb",
+      "enterprise/app/controllers/api/v1/accounts/captain/documents_controller.rb",
+      "enterprise/app/controllers/api/v1/accounts/captain/inboxes_controller.rb",
+      "enterprise/app/controllers/api/v1/accounts/captain/scenarios_controller.rb",
+      "enterprise/app/controllers/api/v1/accounts/whatsapp_calls_controller.rb",
+      "enterprise/app/controllers/twilio/voice_controller.rb",
+      "enterprise/app/services/captain/assistant/session_capture_service.rb",
+      "enterprise/app/services/voice/inbound_call_builder.rb",
+      "enterprise/app/services/whatsapp/incoming_call_service.rb",
+      "enterprise/app/views/api/v1/accounts/whatsapp_calls/initiate.json.jbuilder",
+      "enterprise/lib/captain/tools/handoff_tool.rb",
+      "lib/captain/overview_summary_service.rb",
+      "lib/integrations/openai/openai_prompts/captain_overview_summary.liquid",
+      "package.json",
+      "pnpm-lock.yaml",
+      "spec/controllers/api/v1/accounts/agent_bots_controller_spec.rb",
+      "spec/enterprise/controllers/api/v1/accounts/captain/assistants_controller_spec.rb",
+      "spec/enterprise/controllers/twilio/voice_controller_spec.rb",
+      "spec/enterprise/jobs/captain/conversation/response_builder_job_spec.rb",
+      "spec/enterprise/lib/captain/tools/handoff_tool_spec.rb",
+      "spec/enterprise/services/captain/assistant/session_capture_service_spec.rb",
+      "spec/enterprise/services/voice/inbound_call_builder_spec.rb",
+      "spec/enterprise/services/whatsapp/incoming_call_service_spec.rb",
+      "spec/services/whatsapp/incoming_message_service_spec.rb"
+    ]
+  },
+  "frontend": {
+    "sourceFiles": {
+      "before": 2145,
+      "after": 2160
+    },
+    "requests": {
+      "added": [
+        "GET this.url (app/javascript/dashboard/api/calls.js)"
+      ],
+      "removed": []
+    },
+    "importedPackages": {
+      "added": [],
+      "removed": []
+    },
+    "dependencyVersions": [
+      {
+        "name": "@chatwoot/utils",
+        "before": "^0.0.55",
+        "after": "^0.0.56"
+      }
+    ],
+    "railsAssumptions": {
+      "added": [],
+      "removed": []
+    }
+  },
+  "backend": {
+    "routes": [
+      "config/routes.rb"
+    ],
+    "api": [
+      "app/controllers/api/v1/accounts/agent_bots_controller.rb",
+      "app/controllers/api/v1/accounts/captain/preferences_controller.rb",
+      "app/controllers/api/v1/accounts/labels_controller.rb",
+      "app/controllers/api/v1/accounts/whatsapp/authorizations_controller.rb"
+    ],
+    "migrations": [],
+    "jobs": [],
+    "mailers": [],
+    "realtime": [],
+    "models": [],
+    "services": [
+      "app/services/whatsapp/incoming_message_base_service.rb"
+    ]
+  },
+  "requiredGates": [
+    "Build and test the unmodified candidate frontend",
+    "Register added and removed frontend requests in compatibility contracts",
+    "Classify new Rails-specific frontend assumptions",
+    "Translate relevant migrations, jobs, events, and payload changes to Laravel",
+    "Run HTTP and side-effect contracts against Rails and Laravel",
+    "Run critical browser workflows and update docs/COMPATIBILITY.md"
+  ],
+  "summary": {
+    "changedFiles": 94,
+    "addedRequests": 1,
+    "removedRequests": 0,
+    "dependencyChanges": 1,
+    "newRailsAssumptions": 0,
+    "backendChanges": 6
+  }
+}

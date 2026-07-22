@@ -46,6 +46,7 @@ assigned.
 | Outgoing webhooks | @pallavjagoori | Complete | Complete | Encrypted secrets, exact-body signatures, event filtering, queued retries and delivery logs | N/A | Complete | In progress |
 | Reports | @pallavjagoori | Complete | Complete | Time-series, summary, drilldown, live/grouped metrics and CSV exports with bounded queries | N/A | Complete | In progress |
 | Help Center and CSAT | @pallavjagoori | Complete | Complete | Locale-aware draft-safe public content, scoped authoring, one-time surveys, metrics and CSV | N/A | Complete | In progress |
+| Upstream update automation | @pallavjagoori | Complete | N/A | Scheduled/manual source-tree analysis produces request, dependency, Rails-assumption and backend deltas without mutating the pinned snapshot | N/A | Complete | Compatible |
 
 ## Evidence required for compatibility
 
@@ -69,5 +70,6 @@ be identified rather than hidden behind a domain-level compatible status.
 - Macro actions that send attachments, email transcripts or webhook events are
   deferred to the corresponding attachment, email and integration compatibility
   work. PR 024 supports the other thirteen upstream agent workflow actions.
-- Help Center article search returns an empty compatible payload until the Help
-  Center data model is introduced in PR 033.
+- Candidate update reports identify compatibility work but do not change the
+  pinned production release. Each candidate must complete the report's gates
+  before its source can replace `upstream/chatwoot`.
