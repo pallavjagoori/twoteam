@@ -9,6 +9,7 @@ use App\Http\Controllers\CannedResponseController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\ConversationLabelController;
+use App\Http\Controllers\InboundEmailController;
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LabelController;
 use App\Http\Controllers\MacroController;
@@ -37,6 +38,7 @@ Route::get('/v1/widget/messages', [WidgetController::class, 'messages']);
 Route::post('/v1/widget/messages', [WidgetController::class, 'createMessage']);
 Route::get('/v1/widget/inbox_members', [WidgetController::class, 'inboxMembers']);
 Route::get('/v1/widget/campaigns', [WidgetController::class, 'campaigns']);
+Route::post('/v1/email/inbound/{channel}', [InboundEmailController::class, 'store']);
 
 Route::middleware('chatwoot.auth')->group(function () {
     Route::get('/v1/accounts/{account}', [AccountController::class, 'show']);

@@ -20,6 +20,11 @@ class Channel extends Model
         return $this->hasOne(Inbox::class);
     }
 
+    public function emailChannel(): HasOne
+    {
+        return $this->hasOne(EmailChannel::class);
+    }
+
     protected function casts(): array
     {
         return ['settings' => 'array'];
