@@ -33,7 +33,7 @@ const aliases = [
     find: /^@rails\/actioncable(?:\/src)?$/,
     replacement: actionCableAdapter,
   },
-  { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' },
+  { find: 'vue', replacement: 'vue/dist/vue.runtime.esm-bundler.js' },
   {
     find: 'components',
     replacement: path.resolve(javascriptRoot, 'dashboard/components'),
@@ -86,6 +86,10 @@ const railsReplacementAdapter = () => ({
 
 export default defineConfig({
   base: process.env.TWOTEAM_ASSET_BASE_URL ?? '/',
+  define: {
+    __INTLIFY_DROP_MESSAGE_COMPILER__: false,
+    __INTLIFY_JIT_COMPILATION__: true,
+  },
   root: chatwootRoot,
   publicDir: false,
   plugins: [
@@ -138,6 +142,7 @@ export default defineConfig({
         superadmin_pages: entrypoint('superadmin_pages'),
       },
       output: {
+        banner: 'globalThis.regeneratorRuntime ??= {};',
         entryFileNames: 'assets/[name].js',
       },
     },

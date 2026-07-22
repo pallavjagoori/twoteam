@@ -39,6 +39,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.5"
+      - run: composer install --no-interaction --prefer-dist
+        working-directory: apps/api
       - run: node --test tests/contracts/*.test.mjs
       - run: node scripts/side-effect-contracts.mjs contracts/side-effects/*.json
 
@@ -138,3 +143,67 @@ jobs:
       - name: Stop dependencies
         if: always()
         run: docker compose -f infrastructure/compose.yml down --volumes
+
+  cutover:
+    runs-on: ubuntu-latest
+    needs: [api, web, hardening]
+    env:
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      APP_URL: https://support.example.test
+      POSTGRES_PASSWORD: cutover-database-secret
+      REDIS_PASSWORD: cutover-redis-secret
+      AWS_ACCESS_KEY_ID: cutover-access-key
+      AWS_SECRET_ACCESS_KEY: cutover-storage-secret
+      AWS_BUCKET: twoteam-cutover
+      TWOTEAM_API_IMAGE: twoteam-api:current
+      TWOTEAM_WEB_IMAGE: twoteam-web:current
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.5"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: composer install --no-interaction --prefer-dist
+        working-directory: apps/api
+      - name: Verify Laravel-only route, service and rollback contracts
+        run: node scripts/verify-laravel-cutover.mjs
+      - name: Build immutable Laravel and Vue images
+        run: |
+          docker build --target api-runtime --tag twoteam-api:current --tag twoteam-api:previous .
+          docker build --target web-runtime --tag twoteam-web:current --tag twoteam-web:previous .
+      - name: Start Laravel-only production stack
+        run: docker compose -f infrastructure/compose.production.yml up -d --wait
+      - name: Prove frontend and API cutover
+        run: |
+          node scripts/smoke-laravel-cutover.mjs http://127.0.0.1:8080
+          docker compose -f infrastructure/compose.production.yml exec -T api sh -c '! command -v ruby && ! command -v rails && test ! -e /var/www/html/Gemfile'
+      - name: Render the unmodified login frontend in Chrome
+        run: |
+          google-chrome --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage \
+            --enable-logging=stderr --v=1 \
+            --virtual-time-budget=10000 --window-size=1440,1000 \
+            --dump-dom --screenshot=/tmp/twoteam-login.png \
+            http://127.0.0.1:8080/app/login > /tmp/twoteam-login.html
+          grep -Fq 'data-testid="email_input"' /tmp/twoteam-login.html || { cat /tmp/twoteam-login.html; exit 1; }
+          grep -Fq 'data-testid="password_input"' /tmp/twoteam-login.html
+          grep -Fq 'data-testid="submit_button"' /tmp/twoteam-login.html
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: laravel-cutover-browser-evidence
+          path: |
+            /tmp/twoteam-login.png
+            /tmp/twoteam-login.html
+          if-no-files-found: error
+      - name: Rehearse immutable-image rollback
+        env:
+          TWOTEAM_API_IMAGE: twoteam-api:previous
+          TWOTEAM_WEB_IMAGE: twoteam-web:previous
+        run: |
+          docker compose -f infrastructure/compose.production.yml up -d --wait
+          node scripts/smoke-laravel-cutover.mjs http://127.0.0.1:8080
+      - name: Stop production stack
+        if: always()
+        run: docker compose -f infrastructure/compose.production.yml down --volumes

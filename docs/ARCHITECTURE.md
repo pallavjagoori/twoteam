@@ -105,8 +105,12 @@ PHP. During cutover, Rails and Laravel run side by side. One implementation is
 authoritative for writes in each domain. Safe reads may be mirrored and
 compared before traffic is moved.
 
-Rails can be removed only after no supported frontend request depends on it and
-the production rollback procedure has been rehearsed.
+The production cutover contains no Rails service or fallback. Nginx serves the
+unchanged Vue build and sends application requests exclusively to Laravel.
+Rails remains only in the read-only source snapshot and deterministic offline
+reference environment. The supported boundary and deliberately unsupported
+upstream families are recorded in [`SUPPORTED_SCOPE.md`](SUPPORTED_SCOPE.md),
+and immutable-image rollback is rehearsed by CI.
 
 ## Architectural constraints
 

@@ -4,14 +4,14 @@
 
 | Field | Value |
 | --- | --- |
-| Current phase | Upstream automation and production cutover |
-| Completed roadmap work | PRs 001-034: upstream-update automation complete |
-| In progress | PR 035 production hardening |
-| Completion on `main` | 98% |
-| Completion after this PR | 99% |
+| Current phase | Roadmap complete; compatibility maintenance |
+| Completed roadmap work | PRs 001-036: Laravel-only supported runtime complete |
+| In progress | None |
+| Completion on `main` | 100% |
+| Completion after this PR | 100% |
 | First usable release target | Achieved by PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
-| Production readiness | Not ready |
+| Production readiness | Ready for the declared scope after PR 036; not full upstream parity |
 
 Progress changes only when a roadmap deliverable is merged and satisfies the
 [Definition of Done](DEFINITION_OF_DONE.md). Open branches and draft pull
@@ -56,7 +56,7 @@ requests do not count as completed progress.
 | 033 | Help Center and CSAT | 97% | Complete | 70 API tests, 768 assertions, 100% coverage; draft-safe public content, authoring, immutable surveys, metrics and isolation pass |
 | 034 | Automated upstream-update workflow | 98% | Complete | Tested scheduled/manual workflow and analyzer; real `v4.16.0` → `develop@89b83c6` report found 94 changed files, one added request, one dependency change and six backend changes |
 | 035 | Production hardening | 99% | Complete | 76 API tests, 794 assertions and 100% coverage; CI environment guard, dependency readiness, security headers, request IDs, rate limits, 200-request load gate and PostgreSQL recovery drill |
-| 036 | Laravel cutover and Rails removal | 100% | Not started | — |
+| 036 | Laravel cutover and Rails removal | 100% | Complete | Laravel-rendered unchanged Vue login/dashboard, 131-route cutover contract, seven-service production topology, zero Rails runtime dependencies, browser render, API smoke and immutable-image rollback rehearsal |
 
 Allowed statuses are `Not started`, `Researching`, `In progress`, `Blocked`,
 `Complete` and `Unsupported`.

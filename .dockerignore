@@ -1,0 +1,14 @@
+.git
+.github
+.idea
+.vscode
+**/node_modules
+**/vendor
+**/dist
+apps/api/.env
+apps/api/bootstrap/cache/*.php
+apps/api/storage/framework/cache/**
+apps/api/storage/framework/sessions/**
+apps/api/storage/framework/views/**
+apps/api/storage/logs/**
+artifacts
