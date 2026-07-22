@@ -41,6 +41,11 @@ class Message extends Model
         return $this->hasOne(WhatsappDelivery::class);
     }
 
+    public function metaDelivery(): HasOne
+    {
+        return $this->hasOne(MetaDelivery::class);
+    }
+
     protected function casts(): array
     {
         return ['content_attributes' => 'array', 'private' => 'boolean'];

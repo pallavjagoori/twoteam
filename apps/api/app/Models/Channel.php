@@ -30,6 +30,11 @@ class Channel extends Model
         return $this->hasOne(WhatsappChannel::class);
     }
 
+    public function metaChannel(): HasOne
+    {
+        return $this->hasOne(MetaChannel::class);
+    }
+
     protected function casts(): array
     {
         return ['settings' => 'array'];
