@@ -38,7 +38,7 @@ assigned.
 | Notifications | @pallavjagoori | Complete | Complete | Preference-aware delivery foundation and duplicate prevention | Complete | In progress | In progress |
 | Canned responses and macros | @pallavjagoori | Complete | Complete | Synchronous execution with scoped conversations and duplicate-safe mutations | Complete | In progress | In progress |
 | Automations and business hours | @pallavjagoori | Complete | Complete | Durable per-event idempotency and synchronous action execution | Complete | In progress | In progress |
-| Search | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
+| Search | @pallavjagoori | Complete | Complete | Indexed, paginated and query-count bounded | N/A | In progress | In progress |
 | Email | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | WhatsApp | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Facebook and Instagram | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
@@ -69,3 +69,5 @@ be identified rather than hidden behind a domain-level compatible status.
 - Macro actions that send attachments, email transcripts or webhook events are
   deferred to the corresponding attachment, email and integration compatibility
   work. PR 024 supports the other thirteen upstream agent workflow actions.
+- Help Center article search returns an empty compatible payload until the Help
+  Center data model is introduced in PR 033.

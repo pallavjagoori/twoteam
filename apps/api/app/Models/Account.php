@@ -35,6 +35,11 @@ class Account extends Model
         return $this->hasMany(Conversation::class);
     }
 
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
+
     public function labels(): HasMany
     {
         return $this->hasMany(Label::class);
