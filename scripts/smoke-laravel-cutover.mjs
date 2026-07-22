@@ -4,7 +4,8 @@ import process from 'node:process';
 
 const baseUrl = (process.argv[2] ?? 'http://127.0.0.1:8080').replace(/\/$/, '');
 const expectStatus = async (path, status, options = {}) => {
-  const response = await fetch(`${baseUrl}${path}`, { ...options, signal: AbortSignal.timeout(10000) });
+  const url = new URL(path, `${baseUrl}/`);
+  const response = await fetch(url, { ...options, signal: AbortSignal.timeout(10000) });
   if (response.status !== status) throw new Error(`${path} returned ${response.status}, expected ${status}`);
   return response;
 };
