@@ -17,7 +17,8 @@ WORKDIR /app
 COPY apps/api/composer.json apps/api/composer.lock ./
 RUN composer install --no-dev --no-interaction --no-progress --prefer-dist --no-scripts
 COPY apps/api ./
-RUN composer dump-autoload --classmap-authoritative --no-dev --no-interaction
+RUN find bootstrap/cache -type f ! -name .gitignore -delete \
+    && composer dump-autoload --classmap-authoritative --no-dev --no-interaction
 
 FROM php:8.4-fpm-alpine AS api-runtime
 WORKDIR /var/www/html
