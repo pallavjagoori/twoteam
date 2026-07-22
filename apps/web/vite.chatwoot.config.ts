@@ -138,6 +138,7 @@ export default defineConfig({
         superadmin_pages: entrypoint('superadmin_pages'),
       },
       output: {
+        banner: 'globalThis.regeneratorRuntime ??= {};',
         entryFileNames: 'assets/[name].js',
       },
     },
