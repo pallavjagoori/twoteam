@@ -14,6 +14,7 @@ use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LabelController;
 use App\Http\Controllers\MacroController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\MetaWebhookController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NotificationSettingController;
 use App\Http\Controllers\RealtimeController;
@@ -42,6 +43,8 @@ Route::get('/v1/widget/campaigns', [WidgetController::class, 'campaigns']);
 Route::post('/v1/email/inbound/{channel}', [InboundEmailController::class, 'store']);
 Route::get('/v1/whatsapp/webhook/{channel}', [WhatsappWebhookController::class, 'verify']);
 Route::post('/v1/whatsapp/webhook/{channel}', [WhatsappWebhookController::class, 'store']);
+Route::get('/v1/meta/webhook/{channel}', [MetaWebhookController::class, 'verify']);
+Route::post('/v1/meta/webhook/{channel}', [MetaWebhookController::class, 'store']);
 
 Route::middleware('chatwoot.auth')->group(function () {
     Route::get('/v1/accounts/{account}', [AccountController::class, 'show']);
