@@ -77,3 +77,64 @@ jobs:
       - uses: actions/checkout@v4
       - run: docker compose -f infrastructure/compose.yml config --quiet
       - run: docker compose -f infrastructure/reference/compose.yml config --quiet
+
+  hardening:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_URL: https://support.example.test
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      SESSION_SECURE_COOKIE: "true"
+      LOG_LEVEL: info
+      DB_CONNECTION: pgsql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5433
+      DB_DATABASE: twoteam
+      DB_USERNAME: twoteam
+      DB_PASSWORD: twoteam
+      REDIS_HOST: 127.0.0.1
+      REDIS_PORT: 6380
+      REDIS_PASSWORD: ""
+      CACHE_STORE: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.5"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: composer install --no-interaction --prefer-dist
+        working-directory: apps/api
+      - name: Validate production security configuration
+        run: node scripts/validate-production-env.mjs
+        env:
+          DB_PASSWORD: strong-database-secret
+          REDIS_PASSWORD: strong-redis-secret
+      - name: Start dependencies
+        run: docker compose -f infrastructure/compose.yml up -d --wait postgres redis
+      - name: Build production caches and database
+        run: |
+          php artisan config:cache
+          php artisan migrate --force
+        working-directory: apps/api
+      - name: Rehearse database backup and restore
+        run: bash scripts/recovery-drill.sh
+      - name: Run API load smoke
+        run: |
+          php apps/api/artisan serve --host=127.0.0.1 --port=8000 > /tmp/twoteam-api.log 2>&1 &
+          api_pid=$!
+          trap 'kill "$api_pid"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8000/api/health >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          node scripts/load-smoke.mjs http://127.0.0.1:8000/api/health 200 20 750
+      - name: Stop dependencies
+        if: always()
+        run: docker compose -f infrastructure/compose.yml down --volumes

@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Current phase | Upstream automation and production cutover |
-| Completed roadmap work | PRs 001-033: Help Center and CSAT complete |
-| In progress | PR 034 automated upstream-update workflow |
-| Completion on `main` | 97% |
-| Completion after this PR | 98% |
+| Completed roadmap work | PRs 001-034: upstream-update automation complete |
+| In progress | PR 035 production hardening |
+| Completion on `main` | 98% |
+| Completion after this PR | 99% |
 | First usable release target | Achieved by PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -55,7 +55,7 @@ requests do not count as completed progress.
 | 032 | Reports | 95% | Complete | 66 API tests, 703 assertions, 100% coverage; fixed datasets, v2 report shapes, CSV and 200-record performance gate pass |
 | 033 | Help Center and CSAT | 97% | Complete | 70 API tests, 768 assertions, 100% coverage; draft-safe public content, authoring, immutable surveys, metrics and isolation pass |
 | 034 | Automated upstream-update workflow | 98% | Complete | Tested scheduled/manual workflow and analyzer; real `v4.16.0` → `develop@89b83c6` report found 94 changed files, one added request, one dependency change and six backend changes |
-| 035 | Production hardening | 99% | Not started | — |
+| 035 | Production hardening | 99% | Complete | 76 API tests, 794 assertions and 100% coverage; CI environment guard, dependency readiness, security headers, request IDs, rate limits, 200-request load gate and PostgreSQL recovery drill |
 | 036 | Laravel cutover and Rails removal | 100% | Not started | — |
 
 Allowed statuses are `Not started`, `Researching`, `In progress`, `Blocked`,

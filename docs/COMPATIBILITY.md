@@ -47,6 +47,7 @@ assigned.
 | Reports | @pallavjagoori | Complete | Complete | Time-series, summary, drilldown, live/grouped metrics and CSV exports with bounded queries | N/A | Complete | In progress |
 | Help Center and CSAT | @pallavjagoori | Complete | Complete | Locale-aware draft-safe public content, scoped authoring, one-time surveys, metrics and CSV | N/A | Complete | In progress |
 | Upstream update automation | @pallavjagoori | Complete | N/A | Scheduled/manual source-tree analysis produces request, dependency, Rails-assumption and backend deltas without mutating the pinned snapshot | N/A | Complete | Compatible |
+| Production operations | @pallavjagoori | Complete | Complete | Dependency readiness, request correlation, rate limiting, production environment validation, measured load smoke and isolated PostgreSQL restore drill | N/A | Complete | Compatible |
 
 ## Evidence required for compatibility
 
