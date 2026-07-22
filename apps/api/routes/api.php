@@ -21,6 +21,7 @@ use App\Http\Controllers\PrioritizedWebhookController;
 use App\Http\Controllers\RealtimeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\WebhookSubscriptionController;
 use App\Http\Controllers\WhatsappWebhookController;
 use App\Http\Controllers\WidgetController;
 use Illuminate\Support\Facades\Route;
@@ -87,4 +88,5 @@ Route::middleware('chatwoot.auth')->group(function () {
     Route::post('/v1/accounts/{account}/notifications/{notification}/unread', [NotificationController::class, 'unread']);
     Route::post('/v1/accounts/{account}/notifications/{notification}/snooze', [NotificationController::class, 'snooze']);
     Route::apiResource('/v1/accounts/{account}/notifications', NotificationController::class)->only(['index', 'update', 'destroy'])->parameters(['notifications' => 'notification']);
+    Route::apiResource('/v1/accounts/{account}/webhooks', WebhookSubscriptionController::class)->except('show')->parameters(['webhooks' => 'webhookSubscription']);
 });

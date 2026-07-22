@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Current phase | Operations and productivity |
-| Completed roadmap work | PRs 001-029: Facebook and Instagram complete |
-| In progress | PR 030 Telegram, LINE and SMS |
-| Completion on `main` | 89% |
-| Completion after this PR | 91% |
+| Completed roadmap work | PRs 001-030: Telegram, LINE and SMS complete |
+| In progress | PR 031 outgoing webhooks and integrations |
+| Completion on `main` | 91% |
+| Completion after this PR | 93% |
 | First usable release target | Achieved by PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -51,7 +51,7 @@ requests do not count as completed progress.
 | 028 | WhatsApp | 87% | Complete | 53 API tests, 495 assertions, 100% coverage; signed text/media ingestion, queued delivery, callbacks and tenant isolation pass |
 | 029 | Facebook and Instagram | 89% | Complete | 56 API tests, 545 assertions, 100% coverage; encrypted auth, signed message webhooks, callbacks and tenant isolation pass |
 | 030 | Telegram, LINE and SMS | 91% | Complete | 59 API tests, 609 assertions, 100% coverage; provider ingestion, outgoing jobs, delivery state and isolation pass |
-| 031 | Outgoing webhooks and integrations | 93% | Not started | — |
+| 031 | Outgoing webhooks and integrations | 93% | Complete | 62 API tests, 637 assertions, 100% coverage; signing, event filtering, retries, logs and isolation pass |
 | 032 | Reports | 95% | Not started | — |
 | 033 | Help Center and CSAT | 97% | Not started | — |
 | 034 | Automated upstream-update workflow | 98% | Not started | — |

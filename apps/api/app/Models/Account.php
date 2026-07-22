@@ -65,6 +65,11 @@ class Account extends Model
         return $this->hasMany(AutomationRule::class);
     }
 
+    public function webhookSubscriptions(): HasMany
+    {
+        return $this->hasMany(WebhookSubscription::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'account_users')

@@ -43,7 +43,7 @@ assigned.
 | WhatsApp | @pallavjagoori | Complete | Complete | Signed webhooks, idempotent text/media ingestion, encrypted credentials, queued replies and scoped delivery callbacks | Complete | Complete | In progress |
 | Facebook and Instagram | @pallavjagoori | Complete | Complete | Encrypted tokens, signed idempotent webhooks, attachment normalization, queued replies and scoped delivery/read callbacks | Complete | Complete | In progress |
 | Telegram, LINE and SMS | @pallavjagoori | Complete | Complete | Encrypted provider credentials, signed idempotent ingestion, queued replies, delivery state and tenant isolation | Complete | Complete | In progress |
-| Outgoing webhooks | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
+| Outgoing webhooks | @pallavjagoori | Complete | Complete | Encrypted secrets, exact-body signatures, event filtering, queued retries and delivery logs | N/A | Complete | In progress |
 | Reports | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
 | Help Center and CSAT | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
 
