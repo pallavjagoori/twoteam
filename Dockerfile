@@ -2,11 +2,11 @@
 
 FROM node:24-alpine AS frontend-build
 WORKDIR /src
-RUN corepack enable && corepack install
+RUN corepack enable
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/web/package.json apps/web/package.json
 COPY upstream/chatwoot/package.json upstream/chatwoot/package.json
-RUN pnpm install --frozen-lockfile --ignore-scripts
+RUN corepack install && pnpm install --frozen-lockfile --ignore-scripts
 COPY apps/web apps/web
 COPY upstream/chatwoot upstream/chatwoot
 COPY scripts/validate-chatwoot-build.sh scripts/validate-chatwoot-build.sh
