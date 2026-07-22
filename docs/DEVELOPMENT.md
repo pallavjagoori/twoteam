@@ -74,6 +74,29 @@ Documentation is part of the change. Update the project plan, compatibility
 matrix, architecture decision or operational guide in the same PR that changes
 the corresponding behavior.
 
+## Upstream update analysis
+
+The `Upstream update analysis` workflow runs against Chatwoot `develop` every
+Monday and accepts any tag, branch or commit through manual dispatch. It checks
+out the candidate outside the read-only pinned snapshot and publishes JSON and
+Markdown artifacts covering frontend requests, packages, Rails assumptions and
+relevant backend changes.
+
+For a local candidate checkout:
+
+```sh
+corepack pnpm upstream:analyze -- \
+  --baseline upstream/chatwoot \
+  --candidate /path/to/chatwoot \
+  --baseline-ref v4.16.0 \
+  --candidate-ref <commit> \
+  --json artifacts/upstream-update/report.json \
+  --markdown artifacts/upstream-update/report.md
+```
+
+The report is analysis evidence, not approval to import. Complete every listed
+compatibility gate before updating the pinned snapshot.
+
 ## Website widget demo
 
 Build the unchanged Chatwoot assets with a local asset origin, migrate and seed
