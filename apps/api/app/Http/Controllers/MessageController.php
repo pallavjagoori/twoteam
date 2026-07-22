@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailMessage;
+use App\Jobs\SendWhatsappMessage;
 use App\Models\Account;
 use App\Models\Conversation;
 use App\Models\Message;
@@ -37,6 +38,9 @@ class MessageController extends Controller
         if ($item->inbox->channel->type === 'email') {
             abort_unless($item->contact->email && $item->inbox->channel->emailChannel?->verified_for_sending, 422, 'Email channel is not ready for sending');
         }
+        if ($item->inbox->channel->type === 'whatsapp') {
+            abort_unless($item->contact->phone_number && $item->inbox->channel->whatsappChannel, 422, 'WhatsApp channel is not ready for sending');
+        }
         if (is_string($request->input('content_attributes'))) {
             $request->merge(['content_attributes' => json_decode($request->input('content_attributes'), true)]);
         }
@@ -64,6 +68,10 @@ class MessageController extends Controller
             $domain = $account->domain ?: 'inbound.twoteam.local';
             $delivery = $message->emailDelivery()->create(['message_id_header' => '<twoteam-message-'.$message->id.'@'.$domain.'>', 'status' => 'pending']);
             SendEmailMessage::dispatch($delivery);
+        }
+        if ($item->inbox->channel->type === 'whatsapp') {
+            $delivery = $message->whatsappDelivery()->create(['status' => 'pending']);
+            SendWhatsappMessage::dispatch($delivery);
         }
 
         return response()->json($payload);

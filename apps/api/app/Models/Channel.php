@@ -25,6 +25,11 @@ class Channel extends Model
         return $this->hasOne(EmailChannel::class);
     }
 
+    public function whatsappChannel(): HasOne
+    {
+        return $this->hasOne(WhatsappChannel::class);
+    }
+
     protected function casts(): array
     {
         return ['settings' => 'array'];

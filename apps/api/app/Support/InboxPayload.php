@@ -13,7 +13,7 @@ class InboxPayload
         $payload = [
             'id' => $inbox->id, 'avatar_url' => '', 'channel_id' => $channel->id,
             'name' => $inbox->name, 'channel_type' => 'Channel::'.match ($channel->type) {
-                'web_widget' => 'WebWidget', 'email' => 'Email', default => 'Api'
+                'web_widget' => 'WebWidget', 'email' => 'Email', 'whatsapp' => 'Whatsapp', default => 'Api'
             },
             'greeting_enabled' => $inbox->greeting_enabled, 'greeting_message' => $inbox->greeting_message,
             'working_hours_enabled' => $inbox->working_hours_enabled, 'enable_email_collect' => $inbox->enable_email_collect,
@@ -32,6 +32,10 @@ class InboxPayload
         if ($channel->type === 'email') {
             $email = $channel->emailChannel;
             $payload += ['email' => $email->email, 'forward_to_email' => $email->forward_to_email, 'provider' => $email->provider, 'verified_for_sending' => $email->verified_for_sending];
+        }
+        if ($channel->type === 'whatsapp') {
+            $whatsapp = $channel->whatsappChannel;
+            $payload += ['phone_number' => $whatsapp->phone_number, 'provider' => $whatsapp->provider, 'provider_config' => ['phone_number_id' => $whatsapp->phone_number_id, 'business_account_id' => $whatsapp->business_account_id]];
         }
         if ($administrator) {
             $payload += ['hmac_token' => $channel->hmac_token, 'secret' => $channel->secret];

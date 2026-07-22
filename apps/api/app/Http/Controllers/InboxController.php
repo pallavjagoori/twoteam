@@ -32,13 +32,17 @@ class InboxController extends Controller
     public function store(Request $request, Account $account): JsonResponse
     {
         $this->auth($request, $account, 'update');
-        $data = $request->validate(['name' => ['required', 'string'], 'channel.type' => ['required', 'in:web_widget,api,email'], 'channel.website_url' => ['nullable', 'url'], 'channel.webhook_url' => ['nullable', 'url'], 'channel.widget_color' => ['nullable', 'string'], 'channel.email' => ['required_if:channel.type,email', 'nullable', 'email'], 'channel.provider' => ['nullable', 'in:smtp,google,microsoft'], 'channel.credentials' => ['nullable', 'array'], 'channel.verified_for_sending' => ['nullable', 'boolean']]);
+        $data = $request->validate(['name' => ['required', 'string'], 'channel.type' => ['required', 'in:web_widget,api,email,whatsapp'], 'channel.website_url' => ['nullable', 'url'], 'channel.webhook_url' => ['nullable', 'url'], 'channel.widget_color' => ['nullable', 'string'], 'channel.email' => ['required_if:channel.type,email', 'nullable', 'email'], 'channel.provider' => ['nullable', 'string'], 'channel.credentials' => ['nullable', 'array'], 'channel.verified_for_sending' => ['nullable', 'boolean'], 'channel.phone_number' => ['required_if:channel.type,whatsapp', 'nullable', 'string'], 'channel.provider_config.api_key' => ['required_if:channel.type,whatsapp', 'nullable', 'string'], 'channel.provider_config.phone_number_id' => ['required_if:channel.type,whatsapp', 'nullable', 'string'], 'channel.provider_config.business_account_id' => ['required_if:channel.type,whatsapp', 'nullable', 'string']]);
         $inbox = DB::transaction(function () use ($account, $data) {
-            $settings = array_diff_key($data['channel'], ['type' => true, 'credentials' => true]);
+            $settings = array_diff_key($data['channel'], ['type' => true, 'credentials' => true, 'provider_config' => true]);
             $channel = $account->channels()->create(['type' => $data['channel']['type'], 'settings' => $settings, 'identifier' => Str::random(24), 'secret' => Str::random(48), 'hmac_token' => Str::random(48)]);
             if ($channel->type === 'email') {
                 $domain = $account->domain ?: 'inbound.twoteam.local';
                 $channel->emailChannel()->create(['account_id' => $account->id, 'email' => $data['channel']['email'], 'forward_to_email' => Str::lower(Str::random(24)).'@'.$domain, 'provider' => $data['channel']['provider'] ?? 'smtp', 'encrypted_credentials' => $data['channel']['credentials'] ?? [], 'verified_for_sending' => $data['channel']['verified_for_sending'] ?? false]);
+            }
+            if ($channel->type === 'whatsapp') {
+                $config = $data['channel']['provider_config'];
+                $channel->whatsappChannel()->create(['account_id' => $account->id, 'phone_number' => $data['channel']['phone_number'], 'phone_number_id' => $config['phone_number_id'], 'business_account_id' => $config['business_account_id'], 'encrypted_credentials' => ['api_key' => $config['api_key']], 'provider' => $data['channel']['provider'] ?? 'whatsapp_cloud']);
             }
 
             return $account->inboxes()->create(['name' => $data['name'], 'channel_id' => $channel->id]);
