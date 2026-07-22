@@ -48,6 +48,7 @@ assigned.
 | Help Center and CSAT | @pallavjagoori | Complete | Complete | Locale-aware draft-safe public content, scoped authoring, one-time surveys, metrics and CSV | N/A | Complete | In progress |
 | Upstream update automation | @pallavjagoori | Complete | N/A | Scheduled/manual source-tree analysis produces request, dependency, Rails-assumption and backend deltas without mutating the pinned snapshot | N/A | Complete | Compatible |
 | Production operations | @pallavjagoori | Complete | Complete | Dependency readiness, request correlation, rate limiting, production environment validation, measured load smoke and isolated PostgreSQL restore drill | N/A | Complete | Compatible |
+| Laravel production runtime | @pallavjagoori | Complete | Complete | 131 Laravel-owned routes; Nginx/PHP-FPM migration, worker and scheduler images; no Rails service or fallback; immutable-image rollback | Complete | Complete | Compatible |
 
 ## Evidence required for compatibility
 
@@ -74,3 +75,6 @@ be identified rather than hidden behind a domain-level compatible status.
 - Candidate update reports identify compatibility work but do not change the
   pinned production release. Each candidate must complete the report's gates
   before its source can replace `upstream/chatwoot`.
+- Upstream feature families outside Twoteam 1.0 are listed in
+  [`SUPPORTED_SCOPE.md`](SUPPORTED_SCOPE.md). Their frontend calls fail closed;
+  they are not routed to Rails.

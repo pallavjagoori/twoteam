@@ -5,8 +5,10 @@ Vue frontend mergeable while replacing the Rails backend with Laravel.
 
 ## Project status
 
-The project is in its foundation phase. No production features are complete
-yet.
+The 36-PR roadmap is complete for the declared Twoteam 1.0 scope. Production
+runs the pinned, unmodified Chatwoot Vue entrypoints on Laravel without a Rails
+service or fallback. This is not full upstream feature parity; review the
+[supported production scope](docs/SUPPORTED_SCOPE.md) before deployment.
 
 ## Documentation
 
@@ -19,10 +21,13 @@ yet.
 - [Frontend compatibility adapters](docs/FRONTEND_ADAPTERS.md)
 - [Frontend endpoint and dependency inventory](docs/FRONTEND_INVENTORY.md)
 - [Latest upstream update analysis](docs/UPSTREAM_UPDATE_REPORT.md)
+- [Completed stable update rehearsal](docs/UPSTREAM_UPDATE_REHEARSAL_DISPOSITION.md)
 - [Reproducible Rails reference](docs/RAILS_REFERENCE.md)
 - [HTTP differential testing](docs/HTTP_DIFFERENTIAL_TESTING.md)
 - [Side-effect contracts](docs/SIDE_EFFECT_CONTRACTS.md)
 - [Production operations](docs/OPERATIONS.md)
+- [Supported production scope](docs/SUPPORTED_SCOPE.md)
+- [Laravel cutover runbook](docs/CUTOVER.md)
 - [Authentication compatibility](docs/AUTHENTICATION.md)
 - [Development standards](docs/DEVELOPMENT.md)
 - [Definition of Done](docs/DEFINITION_OF_DONE.md)
