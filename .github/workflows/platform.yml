@@ -181,17 +181,21 @@ jobs:
           docker compose -f infrastructure/compose.production.yml exec -T api sh -c '! command -v ruby && ! command -v rails && test ! -e /var/www/html/Gemfile'
       - name: Render the unmodified login frontend in Chrome
         run: |
-          google-chrome --headless=new --no-sandbox --disable-gpu \
+          google-chrome --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage \
+            --enable-logging=stderr --v=1 \
             --virtual-time-budget=10000 --window-size=1440,1000 \
             --dump-dom --screenshot=/tmp/twoteam-login.png \
             http://127.0.0.1:8080/app/login > /tmp/twoteam-login.html
-          grep -Fq 'data-testid="email_input"' /tmp/twoteam-login.html
+          grep -Fq 'data-testid="email_input"' /tmp/twoteam-login.html || { cat /tmp/twoteam-login.html; exit 1; }
           grep -Fq 'data-testid="password_input"' /tmp/twoteam-login.html
           grep -Fq 'data-testid="submit_button"' /tmp/twoteam-login.html
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: laravel-cutover-browser-evidence
-          path: /tmp/twoteam-login.png
+          path: |
+            /tmp/twoteam-login.png
+            /tmp/twoteam-login.html
           if-no-files-found: error
       - name: Rehearse immutable-image rollback
         env:
