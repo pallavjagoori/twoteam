@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Current phase | Operations and productivity |
-| Completed roadmap work | PRs 001-024: canned responses and macros complete |
-| In progress | PR 025 automations and business hours |
-| Completion on `main` | 76% |
-| Completion after this PR | 80% |
+| Completed roadmap work | PRs 001-025: automations and business hours complete |
+| In progress | PR 026 search |
+| Completion on `main` | 80% |
+| Completion after this PR | 82% |
 | First usable release target | Achieved by PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -46,7 +46,7 @@ requests do not count as completed progress.
 | 023 | Notifications | 73% | Complete | 38 API tests, 311 assertions, 100% coverage; preferences, tenant isolation, realtime delivery and duplicate prevention pass |
 | 024 | Canned responses and macros | 76% | Complete | 41 API tests, 354 assertions, 100% coverage; scoped CRUD, visibility and thirteen macro actions pass |
 | 025 | Automations and business hours | 80% | Complete | 44 API tests, 388 assertions, 100% coverage; timezone schedules, scoped rules and idempotent mutations pass |
-| 026 | Search | 82% | Not started | — |
+| 026 | Search | 82% | Complete | 47 API tests, 415 assertions, 100% coverage; scoped results plus 100-record/12-query/<500 ms performance gate pass |
 | 027 | Email | 85% | Not started | — |
 | 028 | WhatsApp | 87% | Not started | — |
 | 029 | Facebook and Instagram | 89% | Not started | — |
