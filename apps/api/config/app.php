@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'chatwoot_widget_asset_url' => env('CHATWOOT_WIDGET_ASSET_URL', 'http://127.0.0.1:4173/assets/widget.js'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

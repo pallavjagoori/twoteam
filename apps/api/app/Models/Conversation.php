@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['inbox_id', 'contact_id', 'assignee_id', 'team_id', 'display_id', 'uuid', 'status', 'priority', 'muted', 'additional_attributes', 'custom_attributes', 'agent_last_seen_at', 'assignee_last_seen_at', 'contact_last_seen_at', 'last_activity_at', 'snoozed_until'])]
+#[Fillable(['account_id', 'inbox_id', 'contact_id', 'assignee_id', 'team_id', 'display_id', 'uuid', 'status', 'priority', 'muted', 'additional_attributes', 'custom_attributes', 'agent_last_seen_at', 'assignee_last_seen_at', 'contact_last_seen_at', 'last_activity_at', 'snoozed_until'])]
 class Conversation extends Model
 {
     public function account(): BelongsTo

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WidgetController;
 use App\Http\Middleware\AuthenticateChatwootToken;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -14,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
+            Route::get('/widget', [WidgetController::class, 'page']);
             Route::middleware('api')->group(base_path('routes/auth.php'));
         },
     )
