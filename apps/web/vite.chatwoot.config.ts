@@ -86,6 +86,10 @@ const railsReplacementAdapter = () => ({
 
 export default defineConfig({
   base: process.env.TWOTEAM_ASSET_BASE_URL ?? '/',
+  define: {
+    __INTLIFY_DROP_MESSAGE_COMPILER__: false,
+    __INTLIFY_JIT_COMPILATION__: true,
+  },
   root: chatwootRoot,
   publicDir: false,
   plugins: [
