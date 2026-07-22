@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Current phase | Operations and productivity |
-| Completed roadmap work | PRs 001-026: search complete |
-| In progress | PR 027 email |
-| Completion on `main` | 82% |
-| Completion after this PR | 85% |
+| Completed roadmap work | PRs 001-027: email complete |
+| In progress | PR 028 WhatsApp |
+| Completion on `main` | 85% |
+| Completion after this PR | 87% |
 | First usable release target | Achieved by PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -48,7 +48,7 @@ requests do not count as completed progress.
 | 025 | Automations and business hours | 80% | Complete | 44 API tests, 388 assertions, 100% coverage; timezone schedules, scoped rules and idempotent mutations pass |
 | 026 | Search | 82% | Complete | 47 API tests, 415 assertions, 100% coverage; scoped results plus 100-record/12-query/<500 ms performance gate pass |
 | 027 | Email | 85% | Complete | 50 API tests, 451 assertions, 100% coverage; encrypted credentials, signed idempotent inbound threading and queued outbound delivery pass |
-| 028 | WhatsApp | 87% | Not started | — |
+| 028 | WhatsApp | 87% | Complete | 53 API tests, 495 assertions, 100% coverage; signed text/media ingestion, queued delivery, callbacks and tenant isolation pass |
 | 029 | Facebook and Instagram | 89% | Not started | — |
 | 030 | Telegram, LINE and SMS | 91% | Not started | — |
 | 031 | Outgoing webhooks and integrations | 93% | Not started | — |

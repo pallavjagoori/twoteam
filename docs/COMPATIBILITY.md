@@ -40,7 +40,7 @@ assigned.
 | Automations and business hours | @pallavjagoori | Complete | Complete | Durable per-event idempotency and synchronous action execution | Complete | In progress | In progress |
 | Search | @pallavjagoori | Complete | Complete | Indexed, paginated and query-count bounded | N/A | In progress | In progress |
 | Email | @pallavjagoori | Complete | Complete | Signed inbound, idempotency, tenant-safe threading, encrypted credentials and queued outbound delivery | Complete | Complete | In progress |
-| WhatsApp | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
+| WhatsApp | @pallavjagoori | Complete | Complete | Signed webhooks, idempotent text/media ingestion, encrypted credentials, queued replies and scoped delivery callbacks | Complete | Complete | In progress |
 | Facebook and Instagram | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Telegram, LINE and SMS | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Outgoing webhooks | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
