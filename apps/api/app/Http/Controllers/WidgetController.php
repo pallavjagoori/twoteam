@@ -6,6 +6,7 @@ use App\Models\Channel;
 use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\WidgetSession;
+use App\Support\AutomationEngine;
 use App\Support\NotificationPublisher;
 use App\Support\RealtimePublisher;
 use Illuminate\Http\JsonResponse;
@@ -169,6 +170,7 @@ class WidgetController extends Controller
         $conversation->update(['last_activity_at' => now()]);
         RealtimePublisher::publish($session->account_id, 'message.created', $this->messagePayload($message));
         NotificationPublisher::incomingMessage($conversation, $message);
+        AutomationEngine::dispatch('message_created', $conversation, 'message:'.$message->id, $message);
 
         return $message;
     }

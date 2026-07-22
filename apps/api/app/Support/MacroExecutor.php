@@ -2,13 +2,14 @@
 
 namespace App\Support;
 
+use App\Models\AutomationRule;
 use App\Models\Conversation;
 use App\Models\Macro;
 use App\Models\User;
 
 class MacroExecutor
 {
-    public static function run(Macro $macro, Conversation $conversation, User $user): void
+    public static function run(Macro|AutomationRule $macro, Conversation $conversation, User $user): void
     {
         foreach ($macro->actions as $action) {
             self::apply($conversation, $user, $action['action_name'], $action['action_params'] ?? []);
