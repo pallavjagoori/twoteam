@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\ConversationLabelController;
 use App\Http\Controllers\CsatSurveyController;
+use App\Http\Controllers\HealthController;
 use App\Http\Controllers\HelpCenterArticleController;
 use App\Http\Controllers\HelpCenterCategoryController;
 use App\Http\Controllers\InboundEmailController;
@@ -32,12 +33,8 @@ use App\Http\Controllers\WhatsappWebhookController;
 use App\Http\Controllers\WidgetController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/health', function () {
-    return response()->json([
-        'status' => 'ok',
-        'service' => 'twoteam-api',
-    ]);
-});
+Route::get('/health', [HealthController::class, 'live']);
+Route::get('/health/ready', [HealthController::class, 'ready']);
 Route::get('/cable/events', [RealtimeController::class, 'index']);
 Route::post('/cable/presence', [RealtimeController::class, 'presence']);
 Route::get('/attachments/{attachment}/download', [AttachmentController::class, 'download'])->middleware('signed')->name('attachments.download');

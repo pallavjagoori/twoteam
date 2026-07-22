@@ -18,6 +18,8 @@
     "contracts:test": "node --test tests/contracts/*.test.mjs",
     "contracts:http:test": "node --test tests/contracts/http-differential.test.mjs",
     "upstream:analyze": "node scripts/analyze-upstream-update.mjs",
+    "production:validate": "node scripts/validate-production-env.mjs",
+    "production:load-smoke": "node scripts/load-smoke.mjs",
     "web:build": "corepack pnpm --filter @twoteam/web build",
     "web:chatwoot": "corepack pnpm --filter @twoteam/web build:chatwoot",
     "web:dev": "corepack pnpm --filter @twoteam/web dev",

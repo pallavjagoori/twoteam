@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\WidgetController;
 use App\Http\Middleware\AuthenticateChatwootToken;
+use App\Http\Middleware\RequestContext;
+use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -20,6 +22,11 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->api(append: [
+            RequestContext::class,
+            SecurityHeaders::class,
+            'throttle:api',
+        ]);
         $middleware->alias([
             'chatwoot.auth' => AuthenticateChatwootToken::class,
         ]);
