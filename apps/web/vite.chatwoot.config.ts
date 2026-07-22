@@ -33,7 +33,7 @@ const aliases = [
     find: /^@rails\/actioncable(?:\/src)?$/,
     replacement: actionCableAdapter,
   },
-  { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' },
+  { find: 'vue', replacement: 'vue/dist/vue.runtime.esm-bundler.js' },
   {
     find: 'components',
     replacement: path.resolve(javascriptRoot, 'dashboard/components'),
