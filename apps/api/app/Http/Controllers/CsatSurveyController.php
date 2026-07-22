@@ -57,7 +57,7 @@ class CsatSurveyController extends Controller
             $lines[] = implode(',', [$survey->conversation_id, $survey->rating, str_replace(',', ' ', $survey->feedback_message)]);
         }
 
-return response(implode("\n", $lines)."\n", 200, ['Content-Type' => 'text/csv']);
+        return response(implode("\n", $lines)."\n", 200, ['Content-Type' => 'text/csv']);
     }
 
     private function payload(CsatSurveyResponse $survey): array
