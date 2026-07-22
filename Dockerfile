@@ -2,6 +2,7 @@
 
 FROM node:24-alpine AS frontend-build
 WORKDIR /src
+ENV TWOTEAM_ASSET_BASE_URL=/build/chatwoot/
 RUN apk add --no-cache bash \
     && corepack enable
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
