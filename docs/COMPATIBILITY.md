@@ -34,7 +34,7 @@ assigned.
 | Labels and assignments | @pallavjagoori | Complete | Complete | Label CRUD, tagging and agent/team assignment | Complete | Complete | Not started |
 | Realtime transport | @pallavjagoori | Complete | Complete | Durable cursor-based event outbox | Complete | In progress | In progress |
 | Attachments | @pallavjagoori | Complete | Complete | Private storage, signed downloads, limits and deletion cleanup | Complete | In progress | In progress |
-| Website widget | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
+| Website widget | @pallavjagoori | Complete | Complete | Expiring visitor sessions and scoped conversation bootstrap | Complete | Complete | Complete |
 | Notifications | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Canned responses and macros | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Automations and business hours | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |

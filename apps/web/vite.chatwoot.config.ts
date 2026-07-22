@@ -85,6 +85,7 @@ const railsReplacementAdapter = () => ({
 });
 
 export default defineConfig({
+  base: process.env.TWOTEAM_ASSET_BASE_URL ?? '/',
   root: chatwootRoot,
   publicDir: false,
   plugins: [
@@ -137,7 +138,7 @@ export default defineConfig({
         superadmin_pages: entrypoint('superadmin_pages'),
       },
       output: {
-        entryFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name].js',
       },
     },
   },

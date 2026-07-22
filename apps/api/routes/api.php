@@ -12,6 +12,7 @@ use App\Http\Controllers\LabelController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RealtimeController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\WidgetController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/health', function () {
@@ -23,6 +24,13 @@ Route::get('/health', function () {
 Route::get('/cable/events', [RealtimeController::class, 'index']);
 Route::post('/cable/presence', [RealtimeController::class, 'presence']);
 Route::get('/attachments/{attachment}/download', [AttachmentController::class, 'download'])->middleware('signed')->name('attachments.download');
+Route::post('/v1/widget/config', [WidgetController::class, 'config']);
+Route::get('/v1/widget/conversations', [WidgetController::class, 'conversations']);
+Route::post('/v1/widget/conversations', [WidgetController::class, 'createConversation']);
+Route::get('/v1/widget/messages', [WidgetController::class, 'messages']);
+Route::post('/v1/widget/messages', [WidgetController::class, 'createMessage']);
+Route::get('/v1/widget/inbox_members', [WidgetController::class, 'inboxMembers']);
+Route::get('/v1/widget/campaigns', [WidgetController::class, 'campaigns']);
 
 Route::middleware('chatwoot.auth')->group(function () {
     Route::get('/v1/accounts/{account}', [AccountController::class, 'show']);

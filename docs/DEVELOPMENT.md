@@ -73,3 +73,20 @@ Provider code must live behind an interface and include:
 Documentation is part of the change. Update the project plan, compatibility
 matrix, architecture decision or operational guide in the same PR that changes
 the corresponding behavior.
+
+## Website widget demo
+
+Build the unchanged Chatwoot assets with a local asset origin, migrate and seed
+Laravel, then start both servers:
+
+```sh
+TWOTEAM_ASSET_BASE_URL=http://127.0.0.1:4173/ corepack pnpm --filter @twoteam/web build:chatwoot
+cd apps/api && php artisan migrate && php artisan db:seed
+php artisan serve --host=127.0.0.1 --port=8000
+cd ../web && corepack pnpm exec vite preview --outDir dist/chatwoot --host 127.0.0.1 --port 4173
+```
+
+Create a visitor session with `POST /api/v1/widget/config` using website token
+`twoteam-demo-widget`. Open `/widget` with that website token and the returned
+`auth_token` as `cw_conversation`. The seeded local-only agent is
+`test@example.com` with password `password`.

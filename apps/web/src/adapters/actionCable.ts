@@ -1,4 +1,4 @@
-type Identifier = { pubsub_token: string; account_id: number; user_id: number };
+type Identifier = { pubsub_token: string; account_id?: number; user_id?: number };
 type Callbacks = { received?: (message: unknown) => void; connected?: () => void; disconnected?: () => void };
 
 export const createConsumer = () => {
@@ -11,7 +11,9 @@ export const createConsumer = () => {
       const poll = async () => {
         if (!active) return;
         try {
-          const query = new URLSearchParams({ pubsub_token: identifier.pubsub_token, account_id: String(identifier.account_id), user_id: String(identifier.user_id), after: String(cursor) });
+          const query = new URLSearchParams({ pubsub_token: identifier.pubsub_token, after: String(cursor) });
+          if (identifier.account_id !== undefined) query.set('account_id', String(identifier.account_id));
+          if (identifier.user_id !== undefined) query.set('user_id', String(identifier.user_id));
           const response = await fetch(`/api/cable/events?${query}`);
           if (!response.ok) throw new Error('Realtime subscription failed');
           const body = await response.json();
@@ -27,7 +29,7 @@ export const createConsumer = () => {
         }
       };
       void poll();
-      return { perform(action: string) { if (action === 'update_presence') void fetch('/api/cable/presence', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ pubsub_token: identifier.pubsub_token }) }); } };
+      return Object.assign(callbacks, { perform(action: string) { if (action === 'update_presence') void fetch('/api/cable/presence', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ pubsub_token: identifier.pubsub_token }) }); } });
     },
   };
   return { subscriptions, connection: { isOpen: () => connected }, disconnect() { active = false; timers.forEach(clearTimeout); timers.clear(); connected = false; } };
