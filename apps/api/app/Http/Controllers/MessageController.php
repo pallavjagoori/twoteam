@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailMessage;
 use App\Jobs\SendMetaMessage;
+use App\Jobs\SendPrioritizedMessage;
 use App\Jobs\SendWhatsappMessage;
 use App\Models\Account;
 use App\Models\Conversation;
@@ -45,6 +46,10 @@ class MessageController extends Controller
         if (in_array($item->inbox->channel->type, ['facebook', 'instagram'], true)) {
             abort_unless($item->contact->identifier && $item->inbox->channel->metaChannel, 422, 'Meta channel is not ready for sending');
         }
+        if (in_array($item->inbox->channel->type, ['telegram', 'line', 'sms'], true)) {
+            $ready = $item->inbox->channel->type === 'sms' ? $item->contact->phone_number : $item->contact->identifier;
+            abort_unless($ready && $item->inbox->channel->prioritizedChannel, 422, 'Provider channel is not ready for sending');
+        }
         if (is_string($request->input('content_attributes'))) {
             $request->merge(['content_attributes' => json_decode($request->input('content_attributes'), true)]);
         }
@@ -80,6 +85,10 @@ class MessageController extends Controller
         if (in_array($item->inbox->channel->type, ['facebook', 'instagram'], true)) {
             $delivery = $message->metaDelivery()->create(['status' => 'pending']);
             SendMetaMessage::dispatch($delivery);
+        }
+        if (in_array($item->inbox->channel->type, ['telegram', 'line', 'sms'], true)) {
+            $delivery = $message->prioritizedDelivery()->create(['status' => 'pending']);
+            SendPrioritizedMessage::dispatch($delivery);
         }
 
         return response()->json($payload);

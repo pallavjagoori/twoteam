@@ -35,6 +35,11 @@ class Channel extends Model
         return $this->hasOne(MetaChannel::class);
     }
 
+    public function prioritizedChannel(): HasOne
+    {
+        return $this->hasOne(PrioritizedChannel::class);
+    }
+
     protected function casts(): array
     {
         return ['settings' => 'array'];

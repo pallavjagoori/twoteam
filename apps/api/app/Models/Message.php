@@ -46,6 +46,11 @@ class Message extends Model
         return $this->hasOne(MetaDelivery::class);
     }
 
+    public function prioritizedDelivery(): HasOne
+    {
+        return $this->hasOne(PrioritizedDelivery::class);
+    }
+
     protected function casts(): array
     {
         return ['content_attributes' => 'array', 'private' => 'boolean'];

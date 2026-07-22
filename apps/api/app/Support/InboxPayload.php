@@ -13,7 +13,7 @@ class InboxPayload
         $payload = [
             'id' => $inbox->id, 'avatar_url' => '', 'channel_id' => $channel->id,
             'name' => $inbox->name, 'channel_type' => 'Channel::'.match ($channel->type) {
-                'web_widget' => 'WebWidget', 'email' => 'Email', 'whatsapp' => 'Whatsapp', 'facebook' => 'FacebookPage', 'instagram' => 'Instagram', default => 'Api'
+                'web_widget' => 'WebWidget', 'email' => 'Email', 'whatsapp' => 'Whatsapp', 'facebook' => 'FacebookPage', 'instagram' => 'Instagram', 'telegram' => 'Telegram', 'line' => 'Line', 'sms' => 'Sms', default => 'Api'
             },
             'greeting_enabled' => $inbox->greeting_enabled, 'greeting_message' => $inbox->greeting_message,
             'working_hours_enabled' => $inbox->working_hours_enabled, 'enable_email_collect' => $inbox->enable_email_collect,
@@ -40,6 +40,10 @@ class InboxPayload
         if (in_array($channel->type, ['facebook', 'instagram'], true)) {
             $meta = $channel->metaChannel;
             $payload += ['provider' => $meta->platform, 'external_account_id' => $meta->external_account_id, 'external_account_name' => $meta->external_account_name];
+        }
+        if (in_array($channel->type, ['telegram', 'line', 'sms'], true)) {
+            $provider = $channel->prioritizedChannel;
+            $payload += ['provider' => $provider->provider, 'external_identity' => $provider->external_identity];
         }
         if ($administrator) {
             $payload += ['hmac_token' => $channel->hmac_token, 'secret' => $channel->secret];

@@ -42,7 +42,7 @@ assigned.
 | Email | @pallavjagoori | Complete | Complete | Signed inbound, idempotency, tenant-safe threading, encrypted credentials and queued outbound delivery | Complete | Complete | In progress |
 | WhatsApp | @pallavjagoori | Complete | Complete | Signed webhooks, idempotent text/media ingestion, encrypted credentials, queued replies and scoped delivery callbacks | Complete | Complete | In progress |
 | Facebook and Instagram | @pallavjagoori | Complete | Complete | Encrypted tokens, signed idempotent webhooks, attachment normalization, queued replies and scoped delivery/read callbacks | Complete | Complete | In progress |
-| Telegram, LINE and SMS | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
+| Telegram, LINE and SMS | @pallavjagoori | Complete | Complete | Encrypted provider credentials, signed idempotent ingestion, queued replies, delivery state and tenant isolation | Complete | Complete | In progress |
 | Outgoing webhooks | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
 | Reports | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
 | Help Center and CSAT | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
