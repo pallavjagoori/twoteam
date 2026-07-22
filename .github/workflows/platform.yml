@@ -39,6 +39,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.5"
+      - run: composer install --no-interaction --prefer-dist
+        working-directory: apps/api
       - run: node --test tests/contracts/*.test.mjs
       - run: node scripts/side-effect-contracts.mjs contracts/side-effects/*.json
 
