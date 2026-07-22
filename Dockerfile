@@ -2,7 +2,8 @@
 
 FROM node:24-alpine AS frontend-build
 WORKDIR /src
-RUN corepack enable
+RUN apk add --no-cache bash \
+    && corepack enable
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/web/package.json apps/web/package.json
 COPY upstream/chatwoot/package.json upstream/chatwoot/package.json
