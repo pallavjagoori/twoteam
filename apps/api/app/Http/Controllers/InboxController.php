@@ -32,9 +32,14 @@ class InboxController extends Controller
     public function store(Request $request, Account $account): JsonResponse
     {
         $this->auth($request, $account, 'update');
-        $data = $request->validate(['name' => ['required', 'string'], 'channel.type' => ['required', 'in:web_widget,api'], 'channel.website_url' => ['nullable', 'url'], 'channel.webhook_url' => ['nullable', 'url'], 'channel.widget_color' => ['nullable', 'string']]);
+        $data = $request->validate(['name' => ['required', 'string'], 'channel.type' => ['required', 'in:web_widget,api,email'], 'channel.website_url' => ['nullable', 'url'], 'channel.webhook_url' => ['nullable', 'url'], 'channel.widget_color' => ['nullable', 'string'], 'channel.email' => ['required_if:channel.type,email', 'nullable', 'email'], 'channel.provider' => ['nullable', 'in:smtp,google,microsoft'], 'channel.credentials' => ['nullable', 'array'], 'channel.verified_for_sending' => ['nullable', 'boolean']]);
         $inbox = DB::transaction(function () use ($account, $data) {
-            $channel = $account->channels()->create(['type' => $data['channel']['type'], 'settings' => array_diff_key($data['channel'], ['type' => true]), 'identifier' => Str::random(24), 'secret' => Str::random(48), 'hmac_token' => Str::random(48)]);
+            $settings = array_diff_key($data['channel'], ['type' => true, 'credentials' => true]);
+            $channel = $account->channels()->create(['type' => $data['channel']['type'], 'settings' => $settings, 'identifier' => Str::random(24), 'secret' => Str::random(48), 'hmac_token' => Str::random(48)]);
+            if ($channel->type === 'email') {
+                $domain = $account->domain ?: 'inbound.twoteam.local';
+                $channel->emailChannel()->create(['account_id' => $account->id, 'email' => $data['channel']['email'], 'forward_to_email' => Str::lower(Str::random(24)).'@'.$domain, 'provider' => $data['channel']['provider'] ?? 'smtp', 'encrypted_credentials' => $data['channel']['credentials'] ?? [], 'verified_for_sending' => $data['channel']['verified_for_sending'] ?? false]);
+            }
 
             return $account->inboxes()->create(['name' => $data['name'], 'channel_id' => $channel->id]);
         });

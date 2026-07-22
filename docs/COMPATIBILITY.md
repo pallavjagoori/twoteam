@@ -39,7 +39,7 @@ assigned.
 | Canned responses and macros | @pallavjagoori | Complete | Complete | Synchronous execution with scoped conversations and duplicate-safe mutations | Complete | In progress | In progress |
 | Automations and business hours | @pallavjagoori | Complete | Complete | Durable per-event idempotency and synchronous action execution | Complete | In progress | In progress |
 | Search | @pallavjagoori | Complete | Complete | Indexed, paginated and query-count bounded | N/A | In progress | In progress |
-| Email | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
+| Email | @pallavjagoori | Complete | Complete | Signed inbound, idempotency, tenant-safe threading, encrypted credentials and queued outbound delivery | Complete | Complete | In progress |
 | WhatsApp | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Facebook and Instagram | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | Telegram, LINE and SMS | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |

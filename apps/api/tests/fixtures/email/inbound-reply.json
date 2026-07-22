@@ -1,0 +1,8 @@
+{
+  "message_id": "<incoming-reply@example.test>",
+  "in_reply_to": "<twoteam-message-10001@example.test>",
+  "from": "visitor@example.test",
+  "to": "inbox@example.test",
+  "subject": "Re: Need help",
+  "text": "Recorded inbound email reply"
+}
