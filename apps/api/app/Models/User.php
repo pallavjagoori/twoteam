@@ -31,6 +31,11 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function notificationSettings(): HasMany
+    {
+        return $this->hasMany(NotificationSetting::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
