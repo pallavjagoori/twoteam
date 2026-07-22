@@ -5,10 +5,10 @@
 | Field | Value |
 | --- | --- |
 | Current phase | Operations and productivity |
-| Completed roadmap work | PRs 001-022: website widget complete |
-| In progress | PR 023 notifications |
-| Completion on `main` | 70% |
-| Completion after this PR | 73% |
+| Completed roadmap work | PRs 001-023: notifications complete |
+| In progress | PR 024 canned responses and macros |
+| Completion on `main` | 73% |
+| Completion after this PR | 76% |
 | First usable release target | Achieved by PR 022 website widget |
 | Supported Chatwoot version | `v4.16.0` pinned for compatibility work |
 | Production readiness | Not ready |
@@ -44,7 +44,7 @@ requests do not count as completed progress.
 | 021 | Attachments and storage | 67% | Complete | 33 API tests, 227 assertions, 100% coverage; private upload, signed download, cleanup and isolation pass |
 | 022 | Website widget | 70% | Complete | 35 API tests, 271 assertions, 100% coverage; unchanged widget visitor-to-agent browser flow passes |
 | 023 | Notifications | 73% | Complete | 38 API tests, 311 assertions, 100% coverage; preferences, tenant isolation, realtime delivery and duplicate prevention pass |
-| 024 | Canned responses and macros | 76% | Not started | — |
+| 024 | Canned responses and macros | 76% | Complete | 41 API tests, 354 assertions, 100% coverage; scoped CRUD, visibility and thirteen macro actions pass |
 | 025 | Automations and business hours | 80% | Not started | — |
 | 026 | Search | 82% | Not started | — |
 | 027 | Email | 85% | Not started | — |

@@ -45,6 +45,16 @@ class Account extends Model
         return $this->hasMany(NotificationSetting::class);
     }
 
+    public function cannedResponses(): HasMany
+    {
+        return $this->hasMany(CannedResponse::class);
+    }
+
+    public function macros(): HasMany
+    {
+        return $this->hasMany(Macro::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'account_users')
