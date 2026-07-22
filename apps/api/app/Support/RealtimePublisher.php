@@ -8,6 +8,9 @@ class RealtimePublisher
 {
     public static function publish(int $accountId, string $event, array $data): RealtimeEvent
     {
-        return RealtimeEvent::create(['account_id' => $accountId, 'event' => $event, 'data' => $data]);
+        $realtime = RealtimeEvent::create(['account_id' => $accountId, 'event' => $event, 'data' => $data]);
+        OutgoingWebhookPublisher::publish($accountId, $event, $data);
+
+        return $realtime;
     }
 }
