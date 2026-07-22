@@ -55,6 +55,11 @@ class Account extends Model
         return $this->hasMany(Macro::class);
     }
 
+    public function automationRules(): HasMany
+    {
+        return $this->hasMany(AutomationRule::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'account_users')

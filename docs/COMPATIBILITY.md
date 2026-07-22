@@ -37,7 +37,7 @@ assigned.
 | Website widget | @pallavjagoori | Complete | Complete | Expiring visitor sessions and scoped conversation bootstrap | Complete | Complete | Complete |
 | Notifications | @pallavjagoori | Complete | Complete | Preference-aware delivery foundation and duplicate prevention | Complete | In progress | In progress |
 | Canned responses and macros | @pallavjagoori | Complete | Complete | Synchronous execution with scoped conversations and duplicate-safe mutations | Complete | In progress | In progress |
-| Automations and business hours | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
+| Automations and business hours | @pallavjagoori | Complete | Complete | Durable per-event idempotency and synchronous action execution | Complete | In progress | In progress |
 | Search | @pallavjagoori | Not started | Not started | Not started | N/A | Not started | Not started |
 | Email | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |
 | WhatsApp | @pallavjagoori | Not started | Not started | Not started | Not started | Not started | Not started |

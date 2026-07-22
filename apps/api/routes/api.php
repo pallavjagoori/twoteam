@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AttachmentController;
+use App\Http\Controllers\AutomationRuleController;
 use App\Http\Controllers\CannedResponseController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConversationController;
@@ -58,6 +59,8 @@ Route::middleware('chatwoot.auth')->group(function () {
     Route::post('/v1/accounts/{account}/conversations/{conversation}/labels', [ConversationLabelController::class, 'store']);
     Route::apiResource('/v1/accounts/{account}/labels', LabelController::class)->parameters(['labels' => 'label']);
     Route::apiResource('/v1/accounts/{account}/canned_responses', CannedResponseController::class)->except('show')->parameters(['canned_responses' => 'cannedResponse']);
+    Route::post('/v1/accounts/{account}/automation_rules/{automationRule}/clone', [AutomationRuleController::class, 'clone']);
+    Route::apiResource('/v1/accounts/{account}/automation_rules', AutomationRuleController::class)->parameters(['automation_rules' => 'automationRule']);
     Route::post('/v1/accounts/{account}/macros/{macro}/execute', [MacroController::class, 'execute']);
     Route::apiResource('/v1/accounts/{account}/macros', MacroController::class)->parameters(['macros' => 'macro']);
     Route::get('/v1/accounts/{account}/notification_settings', [NotificationSettingController::class, 'show']);

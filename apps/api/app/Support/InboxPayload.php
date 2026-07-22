@@ -17,7 +17,10 @@ class InboxPayload
             'working_hours_enabled' => $inbox->working_hours_enabled, 'enable_email_collect' => $inbox->enable_email_collect,
             'csat_survey_enabled' => $inbox->csat_survey_enabled, 'csat_config' => $inbox->csat_config ?? [],
             'enable_auto_assignment' => $inbox->enable_auto_assignment, 'out_of_office_message' => $inbox->out_of_office_message,
-            'working_hours' => [], 'timezone' => $inbox->timezone, 'callback_webhook_url' => null,
+            'working_hours' => $inbox->workingHours()->orderBy('day_of_week')->get()->map(fn ($hour) => [
+                'day_of_week' => $hour->day_of_week, 'closed_all_day' => $hour->closed_all_day, 'open_all_day' => $hour->open_all_day,
+                'open_hour' => $hour->open_hour, 'open_minutes' => $hour->open_minutes, 'close_hour' => $hour->close_hour, 'close_minutes' => $hour->close_minutes,
+            ]), 'timezone' => $inbox->timezone, 'callback_webhook_url' => null,
             'allow_messages_after_resolved' => $inbox->allow_messages_after_resolved,
             'lock_to_single_conversation' => $inbox->lock_to_single_conversation,
         ];

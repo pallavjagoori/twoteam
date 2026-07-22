@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class InboxController extends Controller
 {
@@ -45,7 +46,23 @@ class InboxController extends Controller
     {
         $this->auth($request, $account, 'update');
         $this->scoped($account, $inbox);
-        $inbox->update($request->validate(['name' => ['sometimes', 'string'], 'greeting_enabled' => ['sometimes', 'boolean'], 'greeting_message' => ['sometimes', 'nullable', 'string'], 'enable_auto_assignment' => ['sometimes', 'boolean'], 'timezone' => ['sometimes', 'string']]));
+        $data = $request->validate([
+            'name' => ['sometimes', 'string'], 'greeting_enabled' => ['sometimes', 'boolean'], 'greeting_message' => ['sometimes', 'nullable', 'string'], 'enable_auto_assignment' => ['sometimes', 'boolean'],
+            'working_hours_enabled' => ['sometimes', 'boolean'], 'out_of_office_message' => ['sometimes', 'nullable', 'string'], 'timezone' => ['sometimes', 'timezone'],
+            'working_hours' => ['sometimes', 'array'], 'working_hours.*.day_of_week' => ['required', 'integer', 'between:0,6'], 'working_hours.*.closed_all_day' => ['required', 'boolean'],
+            'working_hours.*.open_all_day' => ['required', 'boolean'], 'working_hours.*.open_hour' => ['nullable', 'integer', 'between:0,23'], 'working_hours.*.open_minutes' => ['nullable', 'integer', 'between:0,59'],
+            'working_hours.*.close_hour' => ['nullable', 'integer', 'between:0,23'], 'working_hours.*.close_minutes' => ['nullable', 'integer', 'between:0,59'],
+        ]);
+        $schedule = $data['working_hours'] ?? [];
+        unset($data['working_hours']);
+        foreach ($schedule as $hour) {
+            $this->validateWorkingHour($hour);
+            if ($hour['open_all_day']) {
+                $hour = array_merge($hour, ['open_hour' => 0, 'open_minutes' => 0, 'close_hour' => 23, 'close_minutes' => 59]);
+            }
+            $inbox->workingHours()->where('day_of_week', $hour['day_of_week'])->update($hour);
+        }
+        $inbox->update($data);
 
         return response()->json($this->payload($inbox, $request, $account));
     }
@@ -84,5 +101,19 @@ class InboxController extends Controller
     private function scoped(Account $account, Inbox $inbox): void
     {
         abort_unless($inbox->account_id === $account->id, 404);
+    }
+
+    private function validateWorkingHour(array $hour): void
+    {
+        if ($hour['closed_all_day'] && $hour['open_all_day']) {
+            throw ValidationException::withMessages(['working_hours' => 'A day cannot be both open and closed all day.']);
+        }
+        if (! $hour['closed_all_day'] && ! $hour['open_all_day']) {
+            $open = (($hour['open_hour'] ?? -1) * 60) + ($hour['open_minutes'] ?? -1);
+            $close = (($hour['close_hour'] ?? -1) * 60) + ($hour['close_minutes'] ?? -1);
+            if ($open < 0 || $close <= $open) {
+                throw ValidationException::withMessages(['working_hours' => 'Closing time must be after opening time.']);
+            }
+        }
     }
 }
